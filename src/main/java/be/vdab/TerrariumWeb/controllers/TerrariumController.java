@@ -3,7 +3,6 @@ package be.vdab.TerrariumWeb.controllers;
 import be.vdab.TerrariumWeb.domain.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -19,20 +18,19 @@ public class TerrariumController {
         this.organismRows = getOrganismRows();
     }
 
-    @GetMapping
-    ModelAndView showDefault()
+    @GetMapping("/reset")
+    ModelAndView showReset()
 
     {
-        Terrarium.INSTANCE.setTerrarium(10, 3,2,4,0);
+        Terrarium.INSTANCE.reset();
         ModelAndView modelAndView = new ModelAndView("terrarium");
         modelAndView.addObject("organismRows", getOrganismRows());
         return modelAndView;
     }
 
-    @PostMapping("setTerrarium")
-    ModelAndView setTerrarium(long sizeTerrarium, long numCarnivores, long numHerbivores,
-                               long numPlants, long numOmnivores){
-        Terrarium.INSTANCE.setTerrarium(sizeTerrarium, numCarnivores,numHerbivores,numPlants,numOmnivores);
+    @GetMapping("/getTerrarium")
+    ModelAndView getTerrarium(){
+//        Terrarium.INSTANCE.setTerrarium(sizeTerrarium, numCarnivores,numHerbivores,numPlants,numOmnivores);
         ModelAndView modelAndView = new ModelAndView("terrarium");
         modelAndView.addObject("organismRows", getOrganismRows());
         return modelAndView;

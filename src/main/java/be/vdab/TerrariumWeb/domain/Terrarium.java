@@ -8,6 +8,10 @@ public enum Terrarium {
 	INSTANCE;
 	List<Organism> grid;
 	long size;
+	long numCarnivores;
+	long numHerbivores;
+	long numPlants;
+	long numOmnivores;
 
 
 	public void addOrganism(Organism organism) {
@@ -102,27 +106,21 @@ public enum Terrarium {
 	}
 
 	public void reset(){
-		this.size = 6;
 		grid = new ArrayList<>();
+		long capacity = size*size;
 
-		//in het geval dat het randomnummer hetzelfde is, zal er een fout zijn
-		int randomNumber = (int) Math.ceil(Math.random() * getEmptyLocations().size())-1;
-		this.addOrganism(new Plant(getEmptyLocations().get(randomNumber), 1)); //one lifeforce
-
-		randomNumber = (int) Math.ceil(Math.random() * getEmptyLocations().size())-1;
-		this.addOrganism(new Herbivore(getEmptyLocations().get(randomNumber), 0));
-
-		randomNumber = (int) Math.ceil(Math.random() * getEmptyLocations().size())-1;
-		this.addOrganism(new Herbivore(getEmptyLocations().get(randomNumber), 0));
-
-		randomNumber = (int) Math.ceil(Math.random() * getEmptyLocations().size())-1;
-		this.addOrganism(new Herbivore(getEmptyLocations().get(randomNumber), 0));
-
-		randomNumber = (int) Math.ceil(Math.random() * getEmptyLocations().size())-1;
-		this.addOrganism(new Carnivore(getEmptyLocations().get(randomNumber), 0));
-
-		randomNumber = (int) Math.ceil(Math.random() * getEmptyLocations().size())-1;
-		this.addOrganism(new Carnivore(getEmptyLocations().get(randomNumber), 0));
+		for(int i = 1;i<=numCarnivores;i++){
+			int randomNumber = (int) Math.ceil(Math.random() * capacity)-1;
+			this.addOrganism(new Carnivore(getEmptyLocations().get(randomNumber), 1));
+		}
+		for(int i = 1;i<=numHerbivores;i++){
+			int randomNumber = (int) Math.ceil(Math.random() * capacity)-1;
+			this.addOrganism(new Herbivore(getEmptyLocations().get(randomNumber), 1));
+		}
+		for(int i = 1;i<=numPlants;i++){
+			int randomNumber = (int) Math.ceil(Math.random() * capacity)-1;
+			this.addOrganism(new Plant(getEmptyLocations().get(randomNumber), 1));
+		}
 
 	}
 
@@ -130,6 +128,10 @@ public enum Terrarium {
 							 long numPlants, long numOmnivores){
 
 		this.size = sizeTerrarium;
+		this.numCarnivores = numCarnivores;
+		this.numHerbivores = numHerbivores;
+		this.numOmnivores = numOmnivores;
+		this.numPlants = numPlants;
 		long capacity = sizeTerrarium*sizeTerrarium;
 		grid = new ArrayList<>();
 
