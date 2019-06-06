@@ -1,4 +1,4 @@
-package be.vdab.TerrariumWeb.Controllers;
+package be.vdab.TerrariumWeb.controllers;
 
 import be.vdab.TerrariumWeb.domain.*;
 import org.springframework.stereotype.Controller;
@@ -21,6 +21,7 @@ public class TerrariumController {
 
     @GetMapping
     ModelAndView showDefault()
+
     {
         Terrarium.INSTANCE.setTerrarium(10, 3,2,4,0);
         ModelAndView modelAndView = new ModelAndView("terrarium");
