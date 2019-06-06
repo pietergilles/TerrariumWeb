@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="nl" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<!--    <link rel="icon" th:href="@{/images/favicon.ico}" type="image/x-icon">-->
+    <title>Terrarium</title>
+    <link rel="stylesheet" th:href="@{/css/terrarium.css}">
+</head>
+
+<body>
+
+<!--<nav th:replace="fragments::menu"></nav>-->
+<div class="center">
+
+<h1>Terrarium</h1>
+
+    <form method="get" th:action="@{/terrarium/nextDay}">
+        <button type="submit">Next day</button>
+    </form>
+    <form method="get" th:action="@{/terrarium}">
+        <button type="submit">Reset</button>
+    </form>
+
+    <table th:object="${organismRows}">
+
+    <tr th:each="organismRow:${organismRows}">
+        <td th:each="organism:${organismRow}">
+            <img th:if="${organism instanceof T(be.vdab.TerrariumWeb.domain.Herbivore)}"
+                 th:src="@{/images/herbivoreSprite.png}" alt="H">
+            <img th:if="${organism instanceof T(be.vdab.TerrariumWeb.domain.Carnivore)}"
+                 th:src="@{/images/tigerSprite.jpg}" alt="C">
+            <img th:if="${organism instanceof T(be.vdab.TerrariumWeb.domain.Plant) && organism.getLifeForce()>0}"
+                 th:src="@{/images/flowerSprite.jpg}" alt="P">
+        </td>
+    </tr>
+</table>
+
+</div>
+
+</body>
+</html>
