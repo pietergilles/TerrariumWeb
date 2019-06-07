@@ -5,12 +5,12 @@
 <!--    <link rel="icon" th:href="@{/images/favicon.ico}" type="image/x-icon">-->
     <title>Terrarium</title>
     <link rel="stylesheet" th:href="@{/css/terrarium.css}">
+<!--    <script th:src="@{terrarium.js}"></script>-->
 </head>
 
 <body>
 
-<!--<nav th:replace="fragments::menu"></nav>-->
-<div class="center">
+<div class="header">
 
 <h1>Terrarium</h1>
 
@@ -20,22 +20,44 @@
     <form method="get" th:action="@{/terrarium/reset}">
         <button type="submit">Reset</button>
     </form>
-
-    <table th:object="${organismRows}">
-
-    <tr th:each="organismRow:${organismRows}">
-        <td th:each="organism:${organismRow}">
-            <img th:if="${organism instanceof T(be.vdab.TerrariumWeb.domain.Herbivore)}"
-                 th:src="@{/images/herbivoreSprite.png}" alt="H">
-            <img th:if="${organism instanceof T(be.vdab.TerrariumWeb.domain.Carnivore)}"
-                 th:src="@{/images/tigerSprite.jpg}" alt="C">
-            <img th:if="${organism instanceof T(be.vdab.TerrariumWeb.domain.Plant) && organism.getLifeForce()>0}"
-                 th:src="@{/images/flowerSprite.jpg}" alt="P">
-        </td>
-    </tr>
-</table>
+    <br><br>
 
 </div>
+
+
+
+    <div class="playingfield">
+
+
+        <table th:object="${organismRows}">
+
+            <tr th:each="organismRow:${organismRows}">
+                <td th:each="organism:${organismRow}">
+                    <img th:if="${organism instanceof T(be.vdab.TerrariumWeb.domain.Herbivore)&& organism.getLifeForce() < 3}"
+                         th:src="@{/images/babyDeer.png}" alt="H">
+                    <img th:if="${organism instanceof T(be.vdab.TerrariumWeb.domain.Herbivore)&& organism.getLifeForce() >= 3 && organism.getLifeForce() < 6}"
+                         th:src="@{/images/teenageDeer.jpg}" alt="H">
+                    <img th:if="${organism instanceof T(be.vdab.TerrariumWeb.domain.Herbivore)&& organism.getLifeForce() >= 6}"
+                         th:src="@{/images/adultDeer.png}" alt="H">
+                    <img th:if="${organism instanceof T(be.vdab.TerrariumWeb.domain.Carnivore) && organism.getLifeForce() < 3}"
+                         th:src="@{/images/babyTiger.png}" alt="C">
+                    <img th:if="${organism instanceof T(be.vdab.TerrariumWeb.domain.Carnivore) &&organism.getLifeForce() >= 3 && organism.getLifeForce() < 6}"
+                         th:src="@{/images/teenageTiger.png}" alt="C">
+                    <img th:if="${organism instanceof T(be.vdab.TerrariumWeb.domain.Carnivore) && organism.getLifeForce() >= 6}"
+                         th:src="@{/images/tigerSprite.png}" alt="C">
+                    <img th:if="${organism instanceof T(be.vdab.TerrariumWeb.domain.Plant) && organism.getLifeForce()>0}"
+                         th:src="@{/images/shrub.png}" alt="P">
+                    <img th:if="${organism instanceof T(be.vdab.TerrariumWeb.domain.Plant) && organism.getLifeForce()==0}"
+                         th:src="@{/images/nothing.png}" alt="P">
+
+                </td>
+            </tr>
+
+        </table>
+
+    </div>
+
+
 
 </body>
 </html>
