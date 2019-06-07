@@ -39,6 +39,13 @@ public abstract class Animal extends Organism {
         return true;
     }
 
+    public void hasNotEaten() {
+        setLifeForce(this.getLifeForce()-1);
+        if (this.getLifeForce() == 0) {
+            this.getTerrarium().remove(this);
+        }
+    }
+
     public abstract boolean interactWithEnvironment();
 
     public Terrarium getTerrarium() {

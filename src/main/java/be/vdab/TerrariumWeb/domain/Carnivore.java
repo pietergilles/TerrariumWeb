@@ -33,6 +33,7 @@ public class Carnivore extends Animal{
             }
         }
         if(!hasInteracted){
+            this.hasNotEaten();
             this.move();
             return false;
         }
