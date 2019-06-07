@@ -4,12 +4,6 @@ body {
     font-family: Verdana, Cantarell, sans-serif;
 }
 
-.fullwidth {
-    width: 40%;
-    color: white;
-    border: 2px solid #000000;
-}
-
 label span {
     margin-left: 0.5em;
 }
@@ -30,95 +24,6 @@ input:focus,textarea:focus,select:focus {
     background-color: rgb(33, 150, 243);
     border: 2px solid #000000;
     font-color: white;
-}
-
-.zonderbolletjes {
-    list-style: none;
-}
-
-input[type='checkbox'] {
-    display: inline;
-}
-
-nav ul {
-    background-color: #2196f3;
-    padding: 0.4em 0;
-}
-
-nav li {
-    display: inline;
-}
-
-nav li a {
-    color: white;
-    font-weight: bold;
-    padding-left: 0.5em;
-    text-decoration: none;
-    vertical-align: middle;
-}
-
-nav li a:hover {
-    color: rgba(136, 86, 37, 0.83);
-}
-
-ul.zebra {
-    list-style: none;
-    padding: 0;
-}
-
-ul.zebra li {
-    padding-left: 0.5em;
-    padding-bottom: 0.1em;
-    padding-top: 0.1em;
-}
-
-ul.zebra li:nth-child(odd) {
-    background-color: rgba(150, 156, 153, 0.4);
-
-}
-
-ul.zebra li:nth-child(even) {
-    background-color: #eaecee;
-}
-
-ul.zebra li:nth-child(odd):hover, ul.zebra li:nth-child(even):hover {
-    background-color: #2196f3;
-}
-
-dd,dt {
-    margin-left: 0;
-}
-
-dt {
-    margin-top: 0.5em;
-}
-
-dd {
-    font-weight: bold;
-}
-
-dd ul {
-    margin-top: 0;
-}
-
-.naastMekaar {
-    padding-left: 0;
-}
-
-.naastMekaar li {
-    display:inline;
-}
-
-td {
-    text-align: center;
-}
-
-table {
-    border-collapse: collapse;
-}
-
-table, th, td {
-    border: 3px solid #2196f3;
 }
 
 input { border: 3px solid #2196f3 }
