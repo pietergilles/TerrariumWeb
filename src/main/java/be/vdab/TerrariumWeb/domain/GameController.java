@@ -6,6 +6,8 @@ import java.util.List;
 public enum GameController {
 
     INSTANCE;
+    ArrayList< ArrayList<ArrayList<ArrayList<Organism>>>> days;
+    long numberOfDays;
 
     public void spawnPlants(){
         List<Location> emptyLocations = Terrarium.INSTANCE.getEmptyLocations();
@@ -65,7 +67,7 @@ public enum GameController {
         System.out.println(" - - - - - - - - - - - - - -");
     }
 
-    public ArrayList<ArrayList<Organism>> getState(){
+    public ArrayList<ArrayList<Organism>> getNextState(){
         ArrayList<Organism> organisms = (ArrayList) Terrarium.INSTANCE.getAllOrganisms();
         ArrayList<ArrayList<Organism>> organismRows = new ArrayList<ArrayList<Organism>>();
         long size = Terrarium.INSTANCE.getSize();
@@ -91,26 +93,51 @@ public enum GameController {
         return organismRows;
     }
 
-    public ArrayList<ArrayList<ArrayList<Organism>>> getListOfStates(){
+    public ArrayList<ArrayList<ArrayList<Organism>>> getNextDay(){
         ArrayList<ArrayList<ArrayList<Organism>>> states = new ArrayList<>();
         //spawn shrub
         GameController.INSTANCE.spawnPlants();
-        states.add(getState());
+        states.add(getNextState());
         //let Carnivores interact with environment
         for(Organism organism : Terrarium.INSTANCE.getAllOrganisms()){
             if(organism instanceof Carnivore){
                 ((Carnivore) organism).interactWithEnvironment();
-                states.add(getState());
+                states.add(getNextState());
             }
         }
         //then let Herbivores interact with environment
         for(Organism organism : Terrarium.INSTANCE.getAllOrganisms()){
             if(organism instanceof Herbivore){
                 ((Herbivore) organism).interactWithEnvironment();
-                states.add(getState());
+                states.add(getNextState());
             }
         }
         return states;
+    }
 
+    public ArrayList< ArrayList<ArrayList<ArrayList<Organism>>>> generateAllDays(){
+        days = new ArrayList<>();
+        while(Terrarium.INSTANCE.getEmptyLocations().size() > 0){
+            days.add(getNextDay());
+        }
+        System.out.println("Number of days: " + days.size());
+        numberOfDays = days.size();
+        return days;
+    }
+
+    public ArrayList<ArrayList<Organism>> getStateFromDay(int day, int state){
+        if(day-1>=days.size() || state-1>= days.get(day-1).size() || day-1<0 || state -1 <0){
+            return null;
+        }
+        return days.get(day-1).get(state-1);
+    }
+
+    public long getNumberOfDays()
+    {
+        return numberOfDays;
+    }
+
+    public long getNumberOfStatesInDay(int day){
+        return days.get(day-1).size();
     }
 }

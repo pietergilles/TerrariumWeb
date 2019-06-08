@@ -8,6 +8,7 @@ public enum Terrarium {
 	INSTANCE;
 	List<Organism> grid;
 	long day;
+	long state;
 	long size;
 	long numCarnivores;
 	long numHerbivores;
@@ -47,6 +48,7 @@ public enum Terrarium {
 
 	Terrarium() {
 		this.day = 1;
+		this.state = 1;
 		this.size = 6;
 		this.numCarnivores = 2;
 		this.numPlants = 1;
@@ -117,6 +119,8 @@ public enum Terrarium {
 	}
 
 	public void reset(){
+		this.day = 1;
+		this.state = 1;
 		grid = new ArrayList<>();
 
 		for(int i = 1;i<=numCarnivores;i++){
@@ -137,6 +141,8 @@ public enum Terrarium {
 	public void setTerrarium(long sizeTerrarium, long numCarnivores, long numHerbivores,
 							 long numPlants, long numOmnivores){
 
+		this.day = 1;
+		this.state = 1;
 		this.size = sizeTerrarium;
 		this.numCarnivores = numCarnivores;
 		this.numHerbivores = numHerbivores;
@@ -157,5 +163,15 @@ public enum Terrarium {
 	public void setDay(long day)
 	{
 		this.day = day;
+	}
+
+	public long getState()
+	{
+		return state;
+	}
+
+	public void setState(long state)
+	{
+		this.state = state;
 	}
 }

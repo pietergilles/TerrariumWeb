@@ -14,9 +14,11 @@
 
     <h1 th:text="|Terrarium: day ${day}|"></h1>
 
-    <a th:href="@{/terrarium/nextState}"><img th:src="@{/images/Play.png}" alt="Next state"></a>
-    <a th:href="@{/terrarium/nextDay}"><img th:src="@{/images/ForwardRight.png}" alt="Next day"></a>
-    <a th:href="@{/terrarium/reset}"><img th:src="@{/images/Retry.png}" alt="Reset"></a>
+    <a th:href="@{/terrarium/previousDay}"><img th:src="@{/images/previousDay.png}" alt="Next day"></a>
+    <a th:href="@{/terrarium/previousState}"><img th:src="@{/images/previousState.png}" alt="Next state"></a>
+    <a th:href="@{/terrarium/reset}"><img th:src="@{/images/reset.png}" alt="Reset"></a>
+    <a th:href="@{/terrarium/nextState}"><img th:src="@{/images/nextState.png}" alt="Next state"></a>
+    <a th:href="@{/terrarium/nextDay}"><img th:src="@{/images/nextDay.png}" alt="Next day"></a>
 
     <br><br>
 

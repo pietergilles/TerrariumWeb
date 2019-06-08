@@ -1,84 +1,125 @@
 package be.vdab.TerrariumWeb.controllers;
 
-import be.vdab.TerrariumWeb.domain.*;
+import be.vdab.TerrariumWeb.domain.GameController;
+import be.vdab.TerrariumWeb.domain.Terrarium;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
-
 @Controller
 @RequestMapping("/terrarium")
 public class TerrariumController {
 
-    ArrayList<ArrayList<Organism>> organismRows;
-    ArrayList<ArrayList<ArrayList<Organism>>> states;
+//    ArrayList<ArrayList<Organism>> organismRows;
+//    ArrayList<ArrayList<ArrayList<Organism>>> states;
+    int dayCounter;
     int stateCounter;
 
     public TerrariumController() {
-        this.organismRows = GameController.INSTANCE.getState();
-        this.stateCounter = 0;
+
     }
+
+
+
+    @GetMapping("/getTerrarium")
+    ModelAndView getTerrarium(){
+        GameController.INSTANCE.generateAllDays();
+        this.dayCounter = 1;
+        this.stateCounter = 1;
+        ModelAndView modelAndView = new ModelAndView("terrarium");
+        modelAndView.addObject("organismRows", GameController.INSTANCE.getStateFromDay(dayCounter, stateCounter));
+        modelAndView.addObject("day", dayCounter);
+        return modelAndView;
+    }
+
+    @GetMapping("/nextDay")
+    ModelAndView showNextDay()
+    {
+        ModelAndView modelAndView = new ModelAndView("terrarium");
+        stateCounter = 1;
+        if (GameController.INSTANCE.getNumberOfDays() > dayCounter)
+        {
+            dayCounter += 1;
+            modelAndView.addObject("organismRows", GameController.INSTANCE.getStateFromDay(dayCounter, stateCounter));
+            modelAndView.addObject("day", dayCounter);
+            return modelAndView;
+        }
+        else{
+            modelAndView.addObject("organismRows", GameController.INSTANCE.getStateFromDay(dayCounter, stateCounter));
+            modelAndView.addObject("day", dayCounter);
+        }
+        return modelAndView;
+    }
+
+    @GetMapping("/nextState")
+    ModelAndView showNextState(){
+        stateCounter +=1;
+        if(GameController.INSTANCE.getNumberOfStatesInDay(dayCounter) < stateCounter){
+            System.out.println("No next state, showing next day");
+            if(dayCounter<GameController.INSTANCE.getNumberOfDays()){
+                dayCounter+=1;
+                stateCounter = 1;
+            }
+            else{
+                System.out.println("There is no next day, showing last state of last day");
+                stateCounter -=1;
+            }
+        }
+        ModelAndView modelAndView = new ModelAndView("terrarium");
+        modelAndView.addObject("organismRows", GameController.INSTANCE.getStateFromDay(dayCounter, stateCounter));
+        modelAndView.addObject("day", dayCounter);
+        return modelAndView;
+    }
+
+    @GetMapping("/previousDay")
+    ModelAndView showPreviousDay()
+    {
+        ModelAndView modelAndView = new ModelAndView("terrarium");
+        stateCounter = 1;
+        if (dayCounter>1)
+        {
+            dayCounter -= 1;
+
+            modelAndView.addObject("organismRows", GameController.INSTANCE.getStateFromDay(dayCounter, stateCounter));
+            modelAndView.addObject("day", dayCounter);
+            return modelAndView;
+        }
+        else{
+            modelAndView.addObject("organismRows", GameController.INSTANCE.getStateFromDay(dayCounter, stateCounter));
+            modelAndView.addObject("day", dayCounter);
+        }
+        return modelAndView;
+    }
+
+    @GetMapping("/previousState")
+    ModelAndView showPreviousState(){
+        stateCounter -=1;
+        if(stateCounter <1){
+            System.out.println("No previous state, showing last state of previous day");
+            if(dayCounter>1){
+                dayCounter -=1;
+                stateCounter=(int)GameController.INSTANCE.getNumberOfStatesInDay(dayCounter);
+            }
+            else{
+                System.out.println("There is no previous day, showing first state of first day");
+                dayCounter = 1;
+                stateCounter = 1;
+            }
+        }
+        ModelAndView modelAndView = new ModelAndView("terrarium");
+        modelAndView.addObject("organismRows", GameController.INSTANCE.getStateFromDay(dayCounter, stateCounter));
+        modelAndView.addObject("day", dayCounter);
+        return modelAndView;
+    }
+
 
     @GetMapping("/reset")
     ModelAndView showReset()
 
     {
         Terrarium.INSTANCE.reset();
-        Terrarium.INSTANCE.setDay(1);
-        ModelAndView modelAndView = new ModelAndView("terrarium");
-        modelAndView.addObject("organismRows", GameController.INSTANCE.getState());
-        modelAndView.addObject("day", Terrarium.INSTANCE.getDay());
-        return modelAndView;
-    }
-
-    @GetMapping("/getTerrarium")
-    ModelAndView getTerrarium(){
-//        Terrarium.INSTANCE.setTerrarium(sizeTerrarium, numCarnivores,numHerbivores,numPlants,numOmnivores);
-        ModelAndView modelAndView = new ModelAndView("terrarium");
-        modelAndView.addObject("organismRows", GameController.INSTANCE.getState());
-        modelAndView.addObject("day", Terrarium.INSTANCE.getDay());
-        return modelAndView;
-    }
-
-    @GetMapping("/nextDay")
-    ModelAndView showNextDay(){
-            GameController.INSTANCE.spawnPlants();
-            GameController.INSTANCE.activateOrganisms();
-            organismRows = GameController.INSTANCE.getState();
-            ModelAndView modelAndView = new ModelAndView("terrarium");
-            modelAndView.addObject("organismRows", organismRows);
-            Terrarium.INSTANCE.setDay(Terrarium.INSTANCE.getDay() + 1);
-            modelAndView.addObject("day", Terrarium.INSTANCE.getDay());
-
-            //reset list of states
-            stateCounter = 0;
-            states = null;
-
-            return modelAndView;
-    }
-
-    @GetMapping("/nextState")
-    ModelAndView showNextState(){
-        if(states == null){
-            states = GameController.INSTANCE.getListOfStates();
-        }
-        ModelAndView modelAndView = new ModelAndView("terrarium");
-        modelAndView.addObject("organismRows", states.get(stateCounter));
-        modelAndView.addObject("day", Terrarium.INSTANCE.getDay());
-        if(stateCounter < (states.size()-1)){
-            stateCounter += 1;
-//            System.out.println("State " + stateCounter + " of " + states.size());
-        }
-        else{
-            states = null;
-            stateCounter = 0;
-            Terrarium.INSTANCE.setDay(Terrarium.INSTANCE.getDay() + 1);
-
-        }
-
-        return modelAndView;
+        return getTerrarium();
     }
 
 
