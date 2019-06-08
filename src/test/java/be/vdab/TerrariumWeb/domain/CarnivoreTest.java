@@ -11,7 +11,7 @@ public class CarnivoreTest {
 
     @Before
     public void before(){
-        Terrarium.INSTANCE.reset();
+        Terrarium.INSTANCE.setTerrarium(6,0,0,0,0);
         Terrarium.INSTANCE.addOrganism(carnivore);
     }
 
@@ -52,7 +52,7 @@ public class CarnivoreTest {
     }
 
     @Test
-    public void carnivoreDoesNotMoveIfThereIsAPlantToTheRight(){
+    public void carnivoreDoesNotMoveIfThereIsAPlantToTheRight(){ //wait but it does move and it should?
         Plant plant = new Plant(new Location(2, 1), 1);
         Terrarium.INSTANCE.addOrganism(plant);
         boolean willMove = carnivore.interactWithEnvironment();
@@ -73,6 +73,7 @@ public class CarnivoreTest {
     @Test
     public void carnivoreDefeatsWeakerCarnivoresToTheRightAndTakesTheirLifeForce(){
         Carnivore weakerCarnivore = new Carnivore(new Location(2, 1), 1);
+        weakerCarnivore.setSex(carnivore.getSex()); //make sure they fight
         Terrarium.INSTANCE.addOrganism(weakerCarnivore);
         int lifeForceBeforeFight = carnivore.getLifeForce();
         int numOrganismsBeforeFight = Terrarium.INSTANCE.getAllOrganisms().size();
@@ -83,8 +84,9 @@ public class CarnivoreTest {
         assertEquals(numOrganismsBeforeFight -1, numOrganismsAFterFight);
     }
     @Test
-    public void carnivoreIsDefeatedByStrongerCarnivoresToTheRightTheyTakeItsLifeForce(){
+    public void ifCarnivoreIsDefeatedByStrongerCarnivoresToTheRightTheyTakeItsLifeForce(){
         Carnivore strongerCarnivore = new Carnivore(new Location(2, 1), 3);
+        strongerCarnivore.setSex(carnivore.getSex()); //make sure they fight
         Terrarium.INSTANCE.addOrganism(strongerCarnivore);
         int lifeForceBeforeFight = strongerCarnivore.getLifeForce();
         int numOrganismsBeforeFight = Terrarium.INSTANCE.getAllOrganisms().size();
@@ -105,7 +107,7 @@ public class CarnivoreTest {
         int lifeForceAfterFight = carnivore.getLifeForce();
         int numOrganismsAFterFight = Terrarium.INSTANCE.getAllOrganisms().size();
         assertEquals(lifeForceBeforeFight, lifeForceAfterFight);
-        assertEquals(numOrganismsBeforeFight, numOrganismsAFterFight);
+        assertTrue(numOrganismsBeforeFight <= numOrganismsAFterFight); //since they might procreate if different sex
     }
 
     @Test
@@ -120,6 +122,7 @@ public class CarnivoreTest {
         assertEquals(numOrganismsBeforeMeal -1, numOrganismsAfterMeal);
 
         Carnivore carnivoreOnFirstColumn = new Carnivore(new Location(0,0), 1 );
+        carnivoreOnFirstColumn.setSex(carnivoreOnLastColumn.getSex());
         Terrarium.INSTANCE.addOrganism(carnivoreOnFirstColumn);
         int numOrganismsBeforeFight = Terrarium.INSTANCE.getAllOrganisms().size();
         carnivoreOnLastColumn.interactWithEnvironment();

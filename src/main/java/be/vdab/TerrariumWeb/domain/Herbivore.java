@@ -27,7 +27,7 @@ public class Herbivore extends Animal {
             return false;
 
         } else if (neighbourOrganism.getClass().equals(Herbivore.class)) {
-            if(((Animal) neighbourOrganism).getSex() == this.getSex()){
+            if(((Animal) neighbourOrganism).getSex() != this.getSex()){
                 procreate();
                 System.out.println("Herbivores have procreated");
             }

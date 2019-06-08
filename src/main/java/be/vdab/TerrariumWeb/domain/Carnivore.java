@@ -27,7 +27,7 @@ public class Carnivore extends Animal{
                 }
                 //fight it if Carnivore
                 else if(organism.getClass().equals(Carnivore.class)){
-                    if(((Animal) organism).getSex() == this.getSex()){
+                    if(((Animal) organism).getSex() != this.getSex()){
                         procreate();
                         System.out.println("Carnivores have procreated");
                     }
