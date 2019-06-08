@@ -13,7 +13,7 @@ public class Carnivore extends Animal{
     public boolean interactWithEnvironment() {
         List<Organism> organisms = this.getTerrarium().getAllOrganisms();
         Location toTheRight = new Location(getLocation().getX() +1, getLocation().getY());
-        if(toTheRight.getX() > 5){
+        if(toTheRight.getX() >= Terrarium.INSTANCE.getSize()){
             toTheRight.setX(0);
         }
         boolean hasInteracted = false;
@@ -27,13 +27,21 @@ public class Carnivore extends Animal{
                 }
                 //fight it if Carnivore
                 else if(organism.getClass().equals(Carnivore.class)){
-                    fight((Carnivore) organism);
+                    if(((Animal) organism).getSex() == this.getSex()){
+                        procreate();
+                        System.out.println("Carnivores have procreated");
+                    }
+                    else{
+                        fight((Carnivore) organism);
+                        System.out.println("Carnivores fighting");
+                    }
                     hasInteracted = true;
                 }
             }
         }
         if(!hasInteracted){
             this.move();
+            this.hasNotEaten();
             return false;
         }
         return true;
@@ -57,6 +65,9 @@ public class Carnivore extends Animal{
             this.setLifeForce(enemy.getLifeForce() + this.getLifeForce());
             this.getTerrarium().remove(enemy);
         }
+    }
+    private void procreate(){
+        Terrarium.INSTANCE.addNewCarnivore();
     }
 }
 

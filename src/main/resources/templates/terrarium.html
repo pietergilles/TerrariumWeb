@@ -12,18 +12,15 @@
 
 <div class="header">
 
-<h1>Terrarium</h1>
+    <h1 th:text="|Terrarium: day ${day}|"></h1>
 
-    <form method="get" th:action="@{/terrarium/nextDay}">
-        <button type="submit">Next day</button>
-    </form>
-    <form method="get" th:action="@{/terrarium/reset}">
-        <button type="submit">Reset</button>
-    </form>
+    <a th:href="@{/terrarium/nextState}"><img th:src="@{/images/Play.png}" alt="Next state"></a>
+    <a th:href="@{/terrarium/nextDay}"><img th:src="@{/images/ForwardRight.png}" alt="Next day"></a>
+    <a th:href="@{/terrarium/reset}"><img th:src="@{/images/Retry.png}" alt="Reset"></a>
+
     <br><br>
 
 </div>
-
 
 
     <div class="playingfield">
@@ -33,17 +30,17 @@
 
             <tr th:each="organismRow:${organismRows}">
                 <td th:each="organism:${organismRow}">
-                    <img th:if="${organism instanceof T(be.vdab.TerrariumWeb.domain.Herbivore)&& organism.getLifeForce() < 3}"
+                    <img th:if="${organism instanceof T(be.vdab.TerrariumWeb.domain.Herbivore)&& organism.getLifeForce() < 20}"
                          th:src="@{/images/babyDeer.png}" alt="H">
-                    <img th:if="${organism instanceof T(be.vdab.TerrariumWeb.domain.Herbivore)&& organism.getLifeForce() >= 3 && organism.getLifeForce() < 6}"
-                         th:src="@{/images/teenageDeer.jpg}" alt="H">
-                    <img th:if="${organism instanceof T(be.vdab.TerrariumWeb.domain.Herbivore)&& organism.getLifeForce() >= 6}"
+                    <img th:if="${organism instanceof T(be.vdab.TerrariumWeb.domain.Herbivore)&& organism.getLifeForce() >= 20 && organism.getLifeForce() < 30}"
+                         th:src="@{/images/teenageDeer.png}" alt="H">
+                    <img th:if="${organism instanceof T(be.vdab.TerrariumWeb.domain.Herbivore)&& organism.getLifeForce() >= 30}"
                          th:src="@{/images/adultDeer.png}" alt="H">
-                    <img th:if="${organism instanceof T(be.vdab.TerrariumWeb.domain.Carnivore) && organism.getLifeForce() < 3}"
+                    <img th:if="${organism instanceof T(be.vdab.TerrariumWeb.domain.Carnivore) && organism.getLifeForce() < 20}"
                          th:src="@{/images/babyTiger.png}" alt="C">
-                    <img th:if="${organism instanceof T(be.vdab.TerrariumWeb.domain.Carnivore) &&organism.getLifeForce() >= 3 && organism.getLifeForce() < 6}"
+                    <img th:if="${organism instanceof T(be.vdab.TerrariumWeb.domain.Carnivore) &&organism.getLifeForce() >= 20 && organism.getLifeForce() < 30}"
                          th:src="@{/images/teenageTiger.png}" alt="C">
-                    <img th:if="${organism instanceof T(be.vdab.TerrariumWeb.domain.Carnivore) && organism.getLifeForce() >= 6}"
+                    <img th:if="${organism instanceof T(be.vdab.TerrariumWeb.domain.Carnivore) && organism.getLifeForce() >= 30}"
                          th:src="@{/images/tigerSprite.png}" alt="C">
                     <img th:if="${organism instanceof T(be.vdab.TerrariumWeb.domain.Plant) && organism.getLifeForce()>0}"
                          th:src="@{/images/shrub.png}" alt="P">

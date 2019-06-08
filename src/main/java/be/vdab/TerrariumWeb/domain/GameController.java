@@ -1,5 +1,6 @@
 package be.vdab.TerrariumWeb.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public enum GameController {
@@ -62,5 +63,54 @@ public enum GameController {
             System.out.println();
         }
         System.out.println(" - - - - - - - - - - - - - -");
+    }
+
+    public ArrayList<ArrayList<Organism>> getState(){
+        ArrayList<Organism> organisms = (ArrayList) Terrarium.INSTANCE.getAllOrganisms();
+        ArrayList<ArrayList<Organism>> organismRows = new ArrayList<ArrayList<Organism>>();
+        long size = Terrarium.INSTANCE.getSize();
+        for(int y=0; y<size; y++){
+            ArrayList<Organism> organismRow = new ArrayList<>();
+            for(int x=0; x<size; x++){
+                boolean organismFound = false;
+                for(Organism organism : organisms){
+                    Location location = new Location(x, y);
+                    if(organism.getLocation().equals(location)){
+                        organismRow.add(organism);
+                        organismFound = true;
+                    }
+
+                }
+                if(!organismFound){
+                    organismRow.add(new Plant(new Location(x, y), 0));
+                }
+            }
+            organismRows.add(organismRow);
+
+        }
+        return organismRows;
+    }
+
+    public ArrayList<ArrayList<ArrayList<Organism>>> getListOfStates(){
+        ArrayList<ArrayList<ArrayList<Organism>>> states = new ArrayList<>();
+        //spawn shrub
+        GameController.INSTANCE.spawnPlants();
+        states.add(getState());
+        //let Carnivores interact with environment
+        for(Organism organism : Terrarium.INSTANCE.getAllOrganisms()){
+            if(organism instanceof Carnivore){
+                ((Carnivore) organism).interactWithEnvironment();
+                states.add(getState());
+            }
+        }
+        //then let Herbivores interact with environment
+        for(Organism organism : Terrarium.INSTANCE.getAllOrganisms()){
+            if(organism instanceof Herbivore){
+                ((Herbivore) organism).interactWithEnvironment();
+                states.add(getState());
+            }
+        }
+        return states;
+
     }
 }

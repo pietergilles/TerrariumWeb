@@ -13,7 +13,7 @@ public class Herbivore extends Animal {
         Organism neighbourOrganism = null;
         List<Organism> organisms = this.getTerrarium().getAllOrganisms();
         Location organismToMyRight = new Location(getLocation().getX() + 1, getLocation().getY());
-        if(organismToMyRight.getX() > 5){
+        if(organismToMyRight.getX() >= Terrarium.INSTANCE.getSize()){
             organismToMyRight.setX(0);
         }
         for (Organism organism : organisms) {
@@ -22,12 +22,15 @@ public class Herbivore extends Animal {
             }
         }
         if  (neighbourOrganism == null) {
-//            System.out.println("Moved.");
-            return this.move();
+            this.move();
+            this.hasNotEaten();
+            return false;
 
         } else if (neighbourOrganism.getClass().equals(Herbivore.class)) {
-//            System.out.println("Love is in the air!");
-            this.getTerrarium().addNewHerbivore(); // Moet dit geen Boolean worden?
+            if(((Animal) neighbourOrganism).getSex() == this.getSex()){
+                procreate();
+                System.out.println("Herbivores have procreated");
+            }
             return true;
         } else if (neighbourOrganism.getClass().equals(Plant.class)) {
                 this.setLifeForce(this.getLifeForce() + neighbourOrganism.getLifeForce());
@@ -38,5 +41,9 @@ public class Herbivore extends Animal {
 //            System.out.println("Something wrong.");
             return false;
         }
+    }
+
+    private void procreate(){
+        Terrarium.INSTANCE.addNewHerbivore();
     }
 }
