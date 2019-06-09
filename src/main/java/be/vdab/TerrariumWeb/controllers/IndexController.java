@@ -15,7 +15,6 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("/")
 public class IndexController {
-
     @GetMapping
     ModelAndView showIndexPage(TerrariumSizeForm terrariumSizeForm) {
         return new ModelAndView("index", "terrariumSizeForm", terrariumSizeForm);

@@ -11,26 +11,21 @@ import javax.validation.Valid;
 
 @Controller
 public class OrganismsController {
-
-        @GetMapping("/userVariablesForm")
-        ModelAndView showUserVariablesForm(UserVariablesForm userVariablesForm) {
-            return new ModelAndView("userVariablesForm", "userVariablesForm", userVariablesForm);
-        }
-
-        @PostMapping("/terrarium")
-        ModelAndView submitUserVariablesForm(@Valid UserVariablesForm userVariablesForm,
-                                             Errors errors) throws IllegalAccessException {
-            if (errors.hasErrors()) {
-                return new ModelAndView("terrarium");
-            }
-            if (userVariablesForm.containsNoNullVariables()) {
-                Terrarium.INSTANCE.setNumbersOfOrganisms(
-                        userVariablesForm.getNumCarnivores(),
-                        userVariablesForm.getNumHerbivores(),
-                        userVariablesForm.getNumPlants(),
-                        userVariablesForm.getNumOmnivores());
-                return new ModelAndView("redirect:/terrarium/getTerrarium");
-            }
-            return new ModelAndView("redirect:/terrarium");
-        }
+    @GetMapping("/userVariablesForm")
+    ModelAndView showUserVariablesForm(UserVariablesForm userVariablesForm) {
+        return new ModelAndView("userVariablesForm", "userVariablesForm", userVariablesForm);
     }
+
+    @PostMapping("/terrarium")
+    ModelAndView submitUserVariablesForm(@Valid UserVariablesForm userVariablesForm, Errors errors) throws IllegalAccessException {
+        if (userVariablesForm.containsNoNullVariables()) {
+            Terrarium.INSTANCE.setNumbersOfOrganisms(
+                    userVariablesForm.getNumCarnivores(),
+                    userVariablesForm.getNumHerbivores(),
+                    userVariablesForm.getNumPlants(),
+                    userVariablesForm.getNumOmnivores());
+            return new ModelAndView("redirect:/terrarium/getTerrarium");
+        }
+        return new ModelAndView("redirect:/terrarium");
+    }
+}

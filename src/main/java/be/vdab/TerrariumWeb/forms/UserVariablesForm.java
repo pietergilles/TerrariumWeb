@@ -5,10 +5,10 @@ import org.hibernate.validator.constraints.Range;
 import java.lang.reflect.Field;
 
 public class UserVariablesForm {
-    @Range(min = 1, max = 5) private final Integer numCarnivores;
-    @Range(min = 1, max = 5) private final Integer numHerbivores;
-    @Range(min = 1, max = 5) private final Integer numOmnivores;
-    @Range(min = 1, max = 5) private final Integer numPlants;
+    private final Integer numCarnivores;
+    private final Integer numHerbivores;
+    private final Integer numOmnivores;
+    private final Integer numPlants;
 
     public UserVariablesForm(Integer numCarnivores, Integer numHerbivores, Integer numOmnivores, Integer numPlants) {
         this.numCarnivores = numCarnivores;

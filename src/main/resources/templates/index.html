@@ -11,7 +11,6 @@
         <label>Select a number to determine the size of the terrarium:</label>
         <select th:field="*{sizeTerrarium}">
             <option th:each="i : ${#numbers.sequence(6, 20)}" th:value="${i}" th:text="${i}"></option>
-
         </select>
         <input type="submit" value="Submit Size Terrarium">
     </form>

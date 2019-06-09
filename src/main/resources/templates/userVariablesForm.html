@@ -8,22 +8,38 @@
 <body>
 <div>
     <form th:object="${userVariablesForm}" method="post" th:action="@{/terrarium}">
-        <label>Number of carnivores
-            <span th:errors="*{numCarnivores}"></span>
-            <input th:field="*{numCarnivores}" name="numCarnivores">
-        </label>
-        <label>Number of herbivores
-            <span th:errors="*{numHerbivores}"></span>
-            <input th:field="*{numHerbivores}" name="numHerbivores">
-        </label>
-        <label>Number of omnivores
-            <span th:errors="*{numOmnivores}"></span>
-            <input th:field="*{numOmnivores}" name="numOmnivores">
-        </label>
-        <label>Number of plants
-            <span th:errors="*{numPlants}"></span>
-            <input th:field="*{numPlants}" name="numPlants">
-        </label>
+        <div>
+            <label>Number of carnivores:</label>
+            <select th:field="*{numCarnivores}">
+                <option th:each="i : ${#numbers.sequence(1, T(be.vdab.TerrariumWeb.domain.Terrarium).INSTANCE.getSize()/2)}"
+                        th:value="${i}" th:text="${i}"/>
+                </option>
+            </select>
+        </div>
+        <div>
+            <label>Number of herbivores:</label>
+            <select th:field="*{numHerbivores}">
+                <option th:each="i : ${#numbers.sequence(1, T(be.vdab.TerrariumWeb.domain.Terrarium).INSTANCE.getSize()/2)}"
+                        th:value="${i}" th:text="${i}"/>
+                </option>
+            </select>
+        </div>
+        <div>
+            <label>Number of omnivores:</label>
+            <select th:field="*{numOmnivores}">
+                <option th:each="i : ${#numbers.sequence(1, T(be.vdab.TerrariumWeb.domain.Terrarium).INSTANCE.getSize()/2)}"
+                        th:value="${i}" th:text="${i}"/>
+                </option>
+            </select>
+        </div>
+        <div>
+            <label>Number of plants:</label>
+            <select th:field="*{numPlants}">
+                <option th:each="i : ${#numbers.sequence(1, T(be.vdab.TerrariumWeb.domain.Terrarium).INSTANCE.getSize()/2)}"
+                        th:value="${i}" th:text="${i}"/>
+                </option>
+            </select>
+        </div>
         <input type="submit" value="Load Terrarium">
     </form>
 </div>
