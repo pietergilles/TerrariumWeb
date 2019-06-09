@@ -5,6 +5,9 @@
 <!--    <link rel="icon" th:href="@{/images/favicon.ico}" type="image/x-icon">-->
     <title>Terrarium</title>
     <link rel="stylesheet" th:href="@{/css/terrarium.css}">
+    <script>
+        setInterval(function () {document.getElementById("nextDay").click();}, 1000);
+    </script>
 </head>
 
 <body>
@@ -15,7 +18,7 @@
 <h1>Terrarium</h1>
 
     <form method="get" th:action="@{/terrarium/nextDay}">
-        <button type="submit">Next day</button>
+        <button type="submit" id="nextDay">Next day</button>
     </form>
     <form method="get" th:action="@{/terrarium/reset}">
         <button type="submit">Reset</button>
