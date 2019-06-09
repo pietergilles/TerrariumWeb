@@ -18,12 +18,14 @@ input {
     margin-top: 0.2em;
     margin-bottom: 1em;
     font-size: 1.1em;
+    border: 3px solid rgb(33, 150, 243);
 }
 
 input:focus,textarea:focus,select:focus {
     background-color: rgb(33, 150, 243);
-    border: 2px solid #000000;
+    border: 3px solid #000000;
     font-color: white;
 }
 
-input { border: 3px solid #2196f3 }
+input {: 3px solid #2196f3 }
+

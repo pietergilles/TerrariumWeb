@@ -147,9 +147,33 @@ public enum Terrarium {
 			int randomNumber = (int) Math.ceil(Math.random() * capacity)-1;
 			this.addOrganism(new Plant(getEmptyLocations().get(randomNumber), 1));
 		}
-
-
 	}
+
+	public void setSize(long size) {
+		this.size = size;
+	}
+
+	public void setNumbersOfOrganisms(long numCarnivores, long numHerbivores, long numPlants, long numOmnivores) {
+		this.numCarnivores = numCarnivores;
+		this.numHerbivores = numHerbivores;
+		this.numPlants = numPlants;
+		this.numOmnivores = numOmnivores;
+		long capacity = size * size;
+
+		for(int i = 1;i<=numCarnivores;i++){
+			int randomNumber = (int) Math.ceil(Math.random() * capacity)-1;
+			this.addOrganism(new Carnivore(getEmptyLocations().get(randomNumber), 1));
+		}
+		for(int i = 1;i<=numHerbivores;i++){
+			int randomNumber = (int) Math.ceil(Math.random() * capacity)-1;
+			this.addOrganism(new Herbivore(getEmptyLocations().get(randomNumber), 1));
+		}
+		for(int i = 1;i<=numPlants;i++){
+			int randomNumber = (int) Math.ceil(Math.random() * capacity)-1;
+			this.addOrganism(new Plant(getEmptyLocations().get(randomNumber), 1));
+		}
+	}
+
 
 	public long getSize() {
 		return size;

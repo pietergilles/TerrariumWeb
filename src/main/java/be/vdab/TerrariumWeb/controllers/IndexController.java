@@ -15,41 +15,15 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("/")
 public class IndexController {
-    private Integer sizeTerrarium;
 
-    @GetMapping("index")
-    ModelAndView showIndexPage(TerrariumSizeForm terrariumSizeForm, UserVariablesForm userVariablesForm) {
-        ModelAndView modelAndView = new ModelAndView("index");
-        modelAndView.addObject("terrariumSizeForm", terrariumSizeForm);
-        modelAndView.addObject("userVariablesForm", userVariablesForm);
-        return modelAndView;
+    @GetMapping
+    ModelAndView showIndexPage(TerrariumSizeForm terrariumSizeForm) {
+        return new ModelAndView("index", "terrariumSizeForm", terrariumSizeForm);
     }
 
-    @PostMapping("index")
-    String submitTerrariumSizeForm(@Valid TerrariumSizeForm terrariumSizeForm, Errors errors) {
-        if (errors.hasErrors()) {
-            return "/index";
-        }
-        sizeTerrarium = terrariumSizeForm.getSizeTerrarium();
-        System.out.println(sizeTerrarium);
-        return ("redirect:/index");
-    }
-
-    @PostMapping("terrarium")
-    ModelAndView submitUserVariablesForm(@Valid UserVariablesForm userVariablesForm,
-                                         Errors errors) throws IllegalAccessException {
-        if (errors.hasErrors()) {
-            return new ModelAndView("index");
-        }
-        if (userVariablesForm.containsNoNullVariables()) {
-            Terrarium.INSTANCE.setTerrarium(
-                    sizeTerrarium,
-                    userVariablesForm.getNumCarnivores(),
-                    userVariablesForm.getNumHerbivores(),
-                    userVariablesForm.getNumPlants(),
-                    userVariablesForm.getNumOmnivores());
-            return new ModelAndView("redirect:/terrarium/getTerrarium");
-        }
-        return new ModelAndView("redirect:/terrarium");
+    @PostMapping("userVariablesForm")
+    String submitTerrariumSizeForm(@Valid TerrariumSizeForm terrariumSizeForm) {
+        Terrarium.INSTANCE.setSize(terrariumSizeForm.getSizeTerrarium());
+        return "redirect:/userVariablesForm";
     }
 }
