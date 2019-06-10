@@ -13,7 +13,8 @@ public enum GameController {
         List<Location> emptyLocations = Terrarium.INSTANCE.getEmptyLocations();
         if (emptyLocations.size() > 0) {
             int randomNumber = (int) Math.ceil(Math.random() * emptyLocations.size())-1;
-            Plant plant = new Plant(emptyLocations.get(randomNumber), 1); //one lifeforce
+            int randomLifeForce = (int) Math.ceil(Math.random() * 10);
+            Plant plant = new Plant(emptyLocations.get(randomNumber), randomLifeForce);
             Terrarium.INSTANCE.addOrganism(plant);
         }
     }
@@ -130,7 +131,7 @@ public enum GameController {
 
     public ArrayList< ArrayList<ArrayList<ArrayList<Organism>>>> generateAllDays(){
         days = new ArrayList<>();
-        while(Terrarium.INSTANCE.getEmptyLocations().size() > 0 && days.size()<200){
+        while(Terrarium.INSTANCE.getEmptyLocations().size() > 1 && days.size()<200){
             days.add(getNextDay());
         }
         System.out.println("Number of days: " + days.size());
