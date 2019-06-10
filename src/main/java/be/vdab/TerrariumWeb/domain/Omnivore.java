@@ -39,15 +39,11 @@ public class Omnivore extends Animal{
                     hasInteracted = true;
                 }
                 if(organism.getClass().equals(Carnivore.class)) {
-
+                    fight((Carnivore) organism);
                     hasInteracted = true;
                 }
-
-                //fight it if Carnivore
-                else if(organism.getClass().equals(Carnivore.class)){
-
+                else if(organism.getClass().equals(Omnivore.class)){
                     procreate((Omnivore) organism);
-                    fight((Omnivore) organism);
                     hasInteracted = true;
                 }
             }
