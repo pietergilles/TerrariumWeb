@@ -12,7 +12,7 @@
             <label>Number of carnivores:</label>
             <div class="styled-select blue">
             <select th:field="*{numCarnivores}">
-                <option th:each="i : ${#numbers.sequence(1, T(be.vdab.TerrariumWeb.domain.Terrarium).INSTANCE.getSize() / 2 - 1)}"
+                <option th:each="i : ${#numbers.sequence(1, T(be.vdab.TerrariumWeb.domain.Terrarium).INSTANCE.getSize() / 2)}"
                         th:value="${i}" th:text="${i}"/>
                 </option>
             </select>
@@ -22,7 +22,7 @@
             <label>Number of herbivores:</label>
             <div class="styled-select blue">
             <select th:field="*{numHerbivores}">
-                <option th:each="i : ${#numbers.sequence(1, T(be.vdab.TerrariumWeb.domain.Terrarium).INSTANCE.getSize() / 2 - 1)}"
+                <option th:each="i : ${#numbers.sequence(1, T(be.vdab.TerrariumWeb.domain.Terrarium).INSTANCE.getSize() / 2)}"
                         th:value="${i}" th:text="${i}"/>
                 </option>
             </select>
@@ -32,7 +32,7 @@
             <label>Number of omnivores:</label>
             <div class="styled-select blue">
             <select th:field="*{numOmnivores}">
-                <option th:each="i : ${#numbers.sequence(1, T(be.vdab.TerrariumWeb.domain.Terrarium).INSTANCE.getSize() / 2 - 1)}"
+                <option th:each="i : ${#numbers.sequence(1, T(be.vdab.TerrariumWeb.domain.Terrarium).INSTANCE.getSize() / 2)}"
                         th:value="${i}" th:text="${i}"/>
                 </option>
             </select>
