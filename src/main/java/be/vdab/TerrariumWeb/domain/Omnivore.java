@@ -2,18 +2,26 @@ package be.vdab.TerrariumWeb.domain;
 
 import java.util.List;
 
-public class Carnivore extends Animal{
+public class Omnivore extends Animal{
 
+    private char sex;
 
-    public Carnivore(Location location, int lifeForce) {
+    public Omnivore(Location location, int lifeForce) {
+
         super(location, lifeForce);
+        int randomNumber = (int) (Math.ceil(Math.random()) * 2);
+        if (randomNumber <2){
+            this.sex ='M';
+        } else {
+            this.sex ='F';
+        }
     }
 
     @Override
     public boolean interactWithEnvironment() {
         List<Organism> organisms = this.getTerrarium().getAllOrganisms();
         Location toTheRight = new Location(getLocation().getX() +1, getLocation().getY());
-        if(toTheRight.getX() >= Terrarium.INSTANCE.getSize()){
+        if(toTheRight.getX() > this.getTerrarium().getSize()){//klopt dit
             toTheRight.setX(0);
         }
         boolean hasInteracted = false;
@@ -25,40 +33,45 @@ public class Carnivore extends Animal{
                     eat((Herbivore) organism);
                     hasInteracted = true;
                 }
-                //fight it if Carnivore
-                else if(organism.getClass().equals(Carnivore.class)){
+                else if(organism.getClass().equals(Plant.class)) {
+                    eat((Plant) organism);
+                    hasInteracted = true;
+                }
+                else if(organism.getClass().equals(Carnivore.class)) {
+                    fight((Carnivore) organism);
+                    hasInteracted = true;
+                }
+                else if(organism.getClass().equals(Omnivore.class)){
                     if(((Animal) organism).getSex() != this.getSex()){
                         procreate();
-                        System.out.println("Carnivores have procreated");
+                        System.out.println("Omnivores have procreated");
                     }
                     else{
                         fight(organism);
-                        System.out.println("Carnivores fighting");
+                        System.out.println("Omnivores fighting");
                     }
                     hasInteracted = true;
                 }
-                //fight it if omnivore
-                else if(organism.getClass().equals(Omnivore.class)){
-                        fight(organism);
-                        hasInteracted = true;
-                    }
-
-                }
             }
-
+        }
         if(!hasInteracted){
-            this.move();
             this.hasNotEaten();
+            this.move();
             return false;
         }
         return true;
     }
 
-
     private void eat(Herbivore herbivore){
         this.setLifeForce(this.getLifeForce() + herbivore.getLifeForce());
         this.getTerrarium().remove(herbivore);
     }
+
+    private void eat(Plant plant){
+        this.setLifeForce(this.getLifeForce() + plant.getLifeForce());
+        this.getTerrarium().remove(plant);
+    }
+
 
     private void fight(Organism enemy){
         if(enemy.getLifeForce() == this.getLifeForce()){
@@ -73,9 +86,17 @@ public class Carnivore extends Animal{
             this.getTerrarium().remove(enemy);
         }
     }
-    private void procreate(){
-        Terrarium.INSTANCE.addNewCarnivore();
-    }
-}
 
+    public char getSex(){
+        return this.sex;
+    }
+
+
+
+
+    private void procreate(){
+        Terrarium.INSTANCE.addNewOmnivore();
+    }
+
+}
 

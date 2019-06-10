@@ -1,7 +1,5 @@
 package be.vdab.TerrariumWeb.forms;
 
-import org.hibernate.validator.constraints.Range;
-
 import java.lang.reflect.Field;
 
 public class UserVariablesForm {

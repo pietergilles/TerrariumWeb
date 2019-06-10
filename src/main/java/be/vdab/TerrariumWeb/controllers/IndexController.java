@@ -2,9 +2,7 @@ package be.vdab.TerrariumWeb.controllers;
 
 import be.vdab.TerrariumWeb.domain.Terrarium;
 import be.vdab.TerrariumWeb.forms.TerrariumSizeForm;
-import be.vdab.TerrariumWeb.forms.UserVariablesForm;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
