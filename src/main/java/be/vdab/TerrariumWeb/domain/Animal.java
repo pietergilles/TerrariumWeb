@@ -18,32 +18,37 @@ public abstract class Animal extends Organism {
     }
 
     public boolean move() {
-
         int currentX = this.getLocation().getX();
         int currentY = this.getLocation().getY();
 
         List<Location> emptyLocations = Terrarium.INSTANCE.getEmptyLocations();
-        List<Location> possibleLocation = new ArrayList<>();
-        possibleLocation.add(new Location(currentX +1, currentY));
-        possibleLocation.add(new Location(currentX -1, currentY));
-        possibleLocation.add(new Location(currentX , currentY +1));
-        possibleLocation.add(new Location(currentX , currentY -1));
-        for (Location location : possibleLocation) {
-            if(location.getX() >= Terrarium.INSTANCE.getSize()) location.setX(0);
-            if(location.getX() < 0) location.setX((int)Terrarium.INSTANCE.getSize()-1);
-            if(location.getY() >= Terrarium.INSTANCE.getSize()) location.setY(0);
-            if(location.getY() < 0) location.setY((int)Terrarium.INSTANCE.getSize()-1);
-        }
+        List<Location> possibleLocations = new ArrayList<>();
+        possibleLocations.add(new Location(currentX +1, currentY));
+        possibleLocations.add(new Location(currentX -1, currentY));
+        possibleLocations.add(new Location(currentX , currentY +1));
+        possibleLocations.add(new Location(currentX , currentY -1));
         List<Location> removeList = new ArrayList<>();
-        for (Location location : possibleLocation) {
-            if(!emptyLocations.contains(location)) {
-                removeList.add(location);
+        for (Location possibleLocation : possibleLocations) {
+            if(possibleLocation.getX() >= Terrarium.INSTANCE.getSize()) {
+                removeList.add(possibleLocation);
+            }
+            if(possibleLocation.getX() < 0) {
+                removeList.add(possibleLocation);
+            }
+            if(possibleLocation.getY() >= Terrarium.INSTANCE.getSize()) {
+                removeList.add(possibleLocation);
+            }
+            if(possibleLocation.getY() < 0) {
+                removeList.add(possibleLocation);
+            }
+            if(!emptyLocations.contains(possibleLocation)) {
+                removeList.add(possibleLocation);
             }
         }
-        possibleLocation.removeAll(removeList);
-        if (possibleLocation.isEmpty()) return false;
-        int randomNumber = (int) Math.ceil(Math.random() * possibleLocation.size())-1;
-        this.setLocation(possibleLocation.get(randomNumber));
+        possibleLocations.removeAll(removeList);
+        if (possibleLocations.isEmpty()) return false;
+        int randomNumber = (int) Math.ceil(Math.random() * possibleLocations.size())-1;
+        this.setLocation(possibleLocations.get(randomNumber));
         return true;
     }
 
