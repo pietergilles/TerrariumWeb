@@ -29,13 +29,13 @@ public abstract class Animal extends Organism {
         possibleLocations.add(new Location(currentX , currentY -1));
         List<Location> removeList = new ArrayList<>();
         for (Location possibleLocation : possibleLocations) {
-            if(possibleLocation.getX() >= Terrarium.INSTANCE.getSize()) {
+            if(possibleLocation.getX() > Terrarium.INSTANCE.getSize()) {
                 removeList.add(possibleLocation);
             }
             if(possibleLocation.getX() < 0) {
                 removeList.add(possibleLocation);
             }
-            if(possibleLocation.getY() >= Terrarium.INSTANCE.getSize()) {
+            if(possibleLocation.getY() > Terrarium.INSTANCE.getSize()) {
                 removeList.add(possibleLocation);
             }
             if(possibleLocation.getY() < 0) {
