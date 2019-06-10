@@ -21,9 +21,6 @@ public class Omnivore extends Animal{
     public boolean interactWithEnvironment() {
         List<Organism> organisms = this.getTerrarium().getAllOrganisms();
         Location toTheRight = new Location(getLocation().getX() +1, getLocation().getY());
-        if(toTheRight.getX() >= this.getTerrarium().getSize()){
-            toTheRight.setX(0);
-        }
         boolean hasInteracted = false;
         for(Organism organism : organisms){
             //check if there's an organism to the right
