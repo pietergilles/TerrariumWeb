@@ -31,9 +31,9 @@ public enum GameController {
     public void printTerrarium(){
         //not very efficient but temporary, size of Terrarium should be variable
         System.out.println(" - - - - - - - - - - - - - - ");
-        for(int y=0;y<=5;y++){
+        for(int y=0;y<=Terrarium.INSTANCE.getSize() ;y++){
             System.out.print("|\t");
-            for(int x=0;x<=5;x++){
+            for(int x=0;x<=Terrarium.INSTANCE.getSize() ;x++){
 
                 //create new Location for every point on grid
                 Location location = new Location(x, y);
@@ -50,6 +50,9 @@ public enum GameController {
                         }
                         else if(organism instanceof Carnivore){
                             System.out.print("C\t");
+                        }
+                        else if(organism instanceof Omnivore){
+                            System.out.print("O\t");
                         }
                     }
                 }

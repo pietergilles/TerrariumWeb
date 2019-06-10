@@ -39,6 +39,23 @@ public enum Terrarium {
 
 	}
 
+	public void addNewCarnivore() {
+		if(getEmptyLocations().size() > 0){
+			int randomNumber = (int) Math.ceil(Math.random() * getEmptyLocations().size())-1;
+			grid.add(new Carnivore(getEmptyLocations().get(randomNumber), 0));
+		}
+
+	}
+
+	public void addNewOmnivore() {
+		if(getEmptyLocations().size() > 0){
+			int randomNumber = (int) Math.ceil(Math.random() * getEmptyLocations().size())-1;
+			grid.add(new Omnivore(getEmptyLocations().get(randomNumber), 0));
+		}
+
+	}
+
+
 	Terrarium() {
 		this.size = 6;
 		grid = new ArrayList<>(36);
@@ -122,7 +139,20 @@ public enum Terrarium {
 			this.addOrganism(new Plant(getEmptyLocations().get(randomNumber), 1));
 		}
 
+		for(int i = 1;i<=numOmnivores;i++){
+			int randomNumber = (int) Math.ceil(Math.random() * capacity)-1;
+			this.addOrganism(new Omnivore(getEmptyLocations().get(randomNumber), 1));
+		}
+
+
+
+
 	}
+	public void setTerrariumSiz(long SizeTerrarium){
+		
+	}
+
+
 
 	public void setTerrarium(long sizeTerrarium, long numCarnivores, long numHerbivores,
 							 long numPlants, long numOmnivores){
@@ -146,6 +176,11 @@ public enum Terrarium {
 		for(int i = 1;i<=numPlants;i++){
 			int randomNumber = (int) Math.ceil(Math.random() * capacity)-1;
 			this.addOrganism(new Plant(getEmptyLocations().get(randomNumber), 1));
+		}
+
+		for(int i=1;i<=numOmnivores;i++){
+			int randomNumber = (int) Math.ceil(Math.random() * capacity)-1;
+			this.addOrganism(new Omnivore(getEmptyLocations().get(randomNumber), 1));
 		}
 
 

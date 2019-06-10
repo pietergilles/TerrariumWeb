@@ -1,13 +1,23 @@
 package be.vdab.TerrariumWeb.domain;
 
 import java.util.List;
+import be.vdab.TerrariumWeb.domain.Terrarium;
 
 public class Carnivore extends Animal{
 
+    private char sex;
 
     public Carnivore(Location location, int lifeForce) {
         super(location, lifeForce);
+        int randomNumber = (int) (Math.ceil(Math.random() * 2);
+        if (randomNumber <2){
+            this.sex ='F';
+        } else {
+            this.sex ='M';
+        }
     }
+
+
 
     @Override
     public boolean interactWithEnvironment() {
@@ -27,7 +37,9 @@ public class Carnivore extends Animal{
                 }
                 //fight it if Carnivore
                 else if(organism.getClass().equals(Carnivore.class)){
-                    fight((Carnivore) organism);
+                   if (!(procreate((Carnivore) organism)){// dit klopt toch he ?
+                        fight((Carnivore) organism);
+                    }
                     hasInteracted = true;
                 }
             }
@@ -59,6 +71,25 @@ public class Carnivore extends Animal{
             this.getTerrarium().remove(enemy);
         }
     }
+
+    public char getSex(){
+        return this.sex;
+    }
+
+
+
+
+    private boolean procreate(Carnivore mate){
+        boolean mated= false;
+        if (mate.getSex() == this.getSex()){
+            //do nothing
+            mated = false;
+        } else {
+            Terrarium.INSTANCE.addNewCarnivore();
+            mated = true;
+        }
+        return mated;
+
 }
 
 
