@@ -64,12 +64,18 @@ public class Omnivore extends Animal{
     }
 
     private void eat(Herbivore herbivore){
+        System.out.println("Omnivore preparing to eat herbivore, it now has " + this.getLifeForce() + " HP");
+
         this.setLifeForce(this.getLifeForce() + herbivore.getLifeForce());
+        System.out.println("Omnivore has eaten herbivore, it now has " + this.getLifeForce() + " HP");
         this.getTerrarium().remove(herbivore);
     }
 
     private void eat(Plant plant){
+        System.out.println("Omnivore preparing to eat plant, it now has " + this.getLifeForce() + " HP");
+
         this.setLifeForce(this.getLifeForce() + plant.getLifeForce());
+        System.out.println("Omnivore has eaten plant, it now has " + this.getLifeForce() + " HP");
         this.getTerrarium().remove(plant);
     }
 
