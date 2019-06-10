@@ -1,9 +1,8 @@
 package be.vdab.TerrariumWeb.controllers;
 
 import be.vdab.TerrariumWeb.domain.Terrarium;
-import be.vdab.TerrariumWeb.forms.UserVariablesForm;
+import be.vdab.TerrariumWeb.forms.TerrariumSizeForm;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,24 +13,14 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("/")
 public class IndexController {
-
-    @GetMapping("index")
-    ModelAndView showHomePage(UserVariablesForm userVariablesForm) {
-        ModelAndView modelAndView = new ModelAndView("index");
-        modelAndView.addObject("userVariablesForm", userVariablesForm);
-        return modelAndView;
+    @GetMapping
+    ModelAndView showIndexPage(TerrariumSizeForm terrariumSizeForm) {
+        return new ModelAndView("index", "terrariumSizeForm", terrariumSizeForm);
     }
 
-    @PostMapping("index")
-    ModelAndView submitUserVariablesForm(@Valid UserVariablesForm userVariablesForm, Errors errors) throws IllegalAccessException {
-        if (errors.hasErrors()) {
-            return new ModelAndView("index");
-        }
-        if (userVariablesForm.containsNoNullVariables()) {
-            Terrarium.INSTANCE.setTerrarium(userVariablesForm.getSizeTerrarium(), userVariablesForm.getNumCarnivores(),
-                    userVariablesForm.getNumHerbivores(),userVariablesForm.getNumPlants(),userVariablesForm.getNumOmnivores());
-            return new ModelAndView("redirect:/terrarium/getTerrarium");
-        }
-        return new ModelAndView("redirect:/terrarium");
+    @PostMapping("userVariablesForm")
+    String submitTerrariumSizeForm(@Valid TerrariumSizeForm terrariumSizeForm) {
+        Terrarium.INSTANCE.setSize(terrariumSizeForm.getSizeTerrarium());
+        return "redirect:/userVariablesForm";
     }
 }

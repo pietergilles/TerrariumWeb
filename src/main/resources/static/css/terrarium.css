@@ -1,37 +1,42 @@
+html{
+    min-width:500px;
+}
+
 body{
-    background-color:aliceblue;
+    /*background-color:aliceblue;*/
+    background-image: url("/images/background.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
     min-width: 500px;
     min-height:500px;
+    height:100%;
+    width:100%;
+}
+h1{
+    color: whitesmoke;
 }
 
 .header{
-    align-items: center;
     text-align: center;
-    child-align: middle;
 }
-.playingfield{
-    width: 50%;
-    height:0;
+.playingfieldwrapper{
 
-    padding-top: 50%; /*for fixed ascpect ratio*/
+
+}
+
+.playingfield{
+    width: 400px;
+    height:0;
+    padding-top: 400px; /*for fixed ascpect ratio*/
     position:relative;
-    /*align-items: center;*/
-    text-align: center;
-    /*child-align: middle;*/
-    vertical-align: middle;
-    margin-top:10px;
     margin-left: auto;
     margin-right:auto;
-    /*background-image: url("/images/backgroundTable.png");*/
-    /*background-size: cover;*/
     background-color:saddlebrown;
 }
 
 table {
     table-layout: fixed;
     position:absolute; /*nodig omwille van parent fixed aspect*/
-    top: 0;
-    left: 0;
     width: 90%;
     height: 90%;
     top: 50%;

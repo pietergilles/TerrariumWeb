@@ -2,10 +2,32 @@
 <html lang="nl" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-<!--    <link rel="icon" th:href="@{/images/favicon.ico}" type="image/x-icon">-->
+    <link rel="icon" th:href="@{/images/favicon.png}" type="image/x-icon">
     <title>Terrarium</title>
     <link rel="stylesheet" th:href="@{/css/terrarium.css}">
-<!--    <script th:src="@{terrarium.js}"></script>-->
+    <script>
+        var nextState = function () {document.getElementById("nextState").click();};
+        (window.onload = function(){
+            if(localStorage.getItem("playing")){
+                play();
+                let playElement = document.getElementById("play");
+                playElement.style.display="none";
+            }
+            else{
+                let pauseElement = document.getElementById("pause");
+                pauseElement.style.display="none";
+                console.log("pause element not showing?")
+            }
+        })();
+        function play(){
+            i = setInterval(nextState, 1000);
+            localStorage.setItem("playing","true");
+        }
+        function pause(){
+            localStorage.removeItem("playing");
+            clearInterval(i);
+        };
+    </script>
 </head>
 
 <body>
@@ -16,9 +38,14 @@
 
     <a th:href="@{/terrarium/previousDay}"><img th:src="@{/images/previousDay.png}" alt="Next day"></a>
     <a th:href="@{/terrarium/previousState}"><img th:src="@{/images/previousState.png}" alt="Next state"></a>
-    <a th:href="@{/terrarium/reset}"><img th:src="@{/images/reset.png}" alt="Reset"></a>
-    <a th:href="@{/terrarium/nextState}"><img th:src="@{/images/nextState.png}" alt="Next state"></a>
+
+    <a id="play" onclick="play()"><img th:src="@{/images/play.png}" alt="Play"></a>
+    <a id="pause" onclick="pause()"><img th:src="@{/images/pause.png}" alt="Pause" ></a>
+
+    <a th:href="@{/terrarium/nextState}" id="nextState"><img th:src="@{/images/nextState.png}" alt="Next state"></a>
     <a th:href="@{/terrarium/nextDay}"><img th:src="@{/images/nextDay.png}" alt="Next day"></a>
+
+    <a th:href="@{/terrarium/reset}"><img th:src="@{/images/reset.png}" alt="Reset"></a>
 
     <br><br>
 
@@ -57,6 +84,6 @@
     </div>
 
 
-
 </body>
+
 </html>

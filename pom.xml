@@ -39,6 +39,11 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>com.efsavage.jquery</groupId>
+			<artifactId>jquery-maven</artifactId>
+			<version>1.7.2</version>
+		</dependency>
 	</dependencies>
 
 	<build>
