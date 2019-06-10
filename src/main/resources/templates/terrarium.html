@@ -55,6 +55,7 @@
     <div class="playingfield">
 
 
+
         <table th:object="${organismRows}">
 
             <tr th:each="organismRow:${organismRows}">
@@ -71,6 +72,12 @@
                          th:src="@{/images/teenageTiger.png}" alt="C">
                     <img th:if="${organism instanceof T(be.vdab.TerrariumWeb.domain.Carnivore) && organism.getLifeForce() >= 30}"
                          th:src="@{/images/tigerSprite.png}" alt="C">
+                    <img th:if="${organism instanceof T(be.vdab.TerrariumWeb.domain.Omnivore) && organism.getLifeForce() < 20}"
+                         th:src="@{/images/babyBear.png}" alt="O">
+                    <img th:if="${organism instanceof T(be.vdab.TerrariumWeb.domain.Omnivore) &&organism.getLifeForce() >= 20 && organism.getLifeForce() < 30}"
+                         th:src="@{/images/teenageBear.png}" alt="O">
+                    <img th:if="${organism instanceof T(be.vdab.TerrariumWeb.domain.Omnivore) && organism.getLifeForce() >= 30}"
+                         th:src="@{/images/adultBear.png}" alt="O">
                     <img th:if="${organism instanceof T(be.vdab.TerrariumWeb.domain.Plant) && organism.getLifeForce()>0}"
                          th:src="@{/images/shrub.png}" alt="P">
                     <img th:if="${organism instanceof T(be.vdab.TerrariumWeb.domain.Plant) && organism.getLifeForce()==0}"

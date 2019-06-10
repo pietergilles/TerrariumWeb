@@ -24,6 +24,12 @@ public enum GameController {
                 ((Carnivore) organism).interactWithEnvironment();
             }
         }
+        //then let omnivores interact with environment
+        for(Organism organism : Terrarium.INSTANCE.getAllOrganisms()){
+            if(organism instanceof Omnivore){
+                ((Omnivore) organism).interactWithEnvironment();
+            }
+        }
         //then let Herbivores interact with environment
         for(Organism organism : Terrarium.INSTANCE.getAllOrganisms()){
             if(organism instanceof Herbivore){
@@ -102,6 +108,13 @@ public enum GameController {
         for(Organism organism : Terrarium.INSTANCE.getAllOrganisms()){
             if(organism instanceof Carnivore){
                 ((Carnivore) organism).interactWithEnvironment();
+                states.add(getNextState());
+            }
+        }
+        //then let omnivores interact with environment
+        for(Organism organism : Terrarium.INSTANCE.getAllOrganisms()){
+            if(organism instanceof Omnivore){
+                ((Omnivore) organism).interactWithEnvironment();
                 states.add(getNextState());
             }
         }

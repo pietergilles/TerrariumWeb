@@ -43,6 +43,13 @@ public enum Terrarium {
 			grid.add(new Carnivore(getEmptyLocations().get(randomNumber), 10));
 		}
 	}
+	public void addNewOmnivore() {
+		if(getEmptyLocations().size() > 0){
+			int randomNumber = (int) Math.ceil(Math.random() * getEmptyLocations().size())-1;
+			grid.add(new Omnivore(getEmptyLocations().get(randomNumber), 10));
+		}
+
+	}
 	Terrarium() {
 		this.size = 6;
 		this.numCarnivores = 2;
@@ -117,6 +124,10 @@ public enum Terrarium {
 			int randomNumber = (int) Math.ceil(Math.random() * getEmptyLocations().size())-1;
 			this.addOrganism(new Herbivore(getEmptyLocations().get(randomNumber), 10));
 		}
+		for(int i = 1;i<=numOmnivores;i++){
+			int randomNumber = (int) Math.ceil(Math.random() * getEmptyLocations().size())-1;
+			this.addOrganism(new Omnivore(getEmptyLocations().get(randomNumber), 10));
+		}
 		for(int i = 1;i<=numPlants;i++){
 			int randomNumber = (int) Math.ceil(Math.random() * getEmptyLocations().size())-1;
 			this.addOrganism(new Plant(getEmptyLocations().get(randomNumber), 1));
@@ -147,19 +158,7 @@ public enum Terrarium {
 		this.numPlants = numPlants;
 		this.numOmnivores = numOmnivores;
 
-
-		for(int i = 1;i<=numCarnivores;i++){
-			int randomNumber = (int) Math.ceil(Math.random() * getEmptyLocations().size())-1;
-			this.addOrganism(new Carnivore(getEmptyLocations().get(randomNumber), 1));
-		}
-		for(int i = 1;i<=numHerbivores;i++){
-			int randomNumber = (int) Math.ceil(Math.random() * getEmptyLocations().size())-1;
-			this.addOrganism(new Herbivore(getEmptyLocations().get(randomNumber), 1));
-		}
-		for(int i = 1;i<=numPlants;i++){
-			int randomNumber = (int) Math.ceil(Math.random() * getEmptyLocations().size())-1;
-			this.addOrganism(new Plant(getEmptyLocations().get(randomNumber), 1));
-		}
+		reset();
 	}
 
 
