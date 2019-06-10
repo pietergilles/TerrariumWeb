@@ -24,6 +24,7 @@ public class Herbivore extends Animal {
         if  (neighbourOrganism == null) {
             this.move();
             this.hasNotEaten();
+            System.out.println("Herbivore has not eaten, it now has " + this.getLifeForce() + " HP");
             return false;
 
         } else if (neighbourOrganism.getClass().equals(Herbivore.class)) {

@@ -84,7 +84,7 @@ public enum GameController {
                 for(Organism organism : organisms){
                     Location location = new Location(x, y);
                     if(organism.getLocation().equals(location)){
-                        organismRow.add(organism);
+                        organismRow.add(clone(organism));
                         organismFound = true;
                     }
 
@@ -130,7 +130,7 @@ public enum GameController {
 
     public ArrayList< ArrayList<ArrayList<ArrayList<Organism>>>> generateAllDays(){
         days = new ArrayList<>();
-        while(Terrarium.INSTANCE.getEmptyLocations().size() > 0){
+        while(Terrarium.INSTANCE.getEmptyLocations().size() > 0 && days.size()<200){
             days.add(getNextDay());
         }
         System.out.println("Number of days: " + days.size());
@@ -152,5 +152,24 @@ public enum GameController {
 
     public long getNumberOfStatesInDay(int day){
         return days.get(day-1).size();
+    }
+
+    private Organism clone(Organism organism){
+        if(organism instanceof Plant){
+            return new Plant(organism.getLocation(), organism.getLifeForce());
+        }
+        else if(organism instanceof Carnivore){
+            return new Carnivore(organism.getLocation(), organism.getLifeForce());
+        }
+        else if(organism instanceof Herbivore){
+            return new Herbivore(organism.getLocation(), organism.getLifeForce());
+        }
+        else if(organism instanceof Omnivore){
+            return new Omnivore(organism.getLocation(), organism.getLifeForce());
+        }
+        else{
+            return new Plant(organism.getLocation(), 0);
+        }
+
     }
 }
