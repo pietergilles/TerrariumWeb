@@ -27,7 +27,7 @@ public enum Terrarium {
 
 		} else if (grid.contains(organism)) {
 
-			throw new IllegalArgumentException(" de index is meer dan "+grid.size());
+			throw new IllegalArgumentException(" de index is meer dan 36 ");
 		}
 	}
 
@@ -36,21 +36,28 @@ public enum Terrarium {
 			int randomNumber = (int) Math.ceil(Math.random() * getEmptyLocations().size())-1;
 			grid.add(new Herbivore(getEmptyLocations().get(randomNumber), 0));
 		}
+
 	}
 
-	//adds new carnivore
-	public void addNewCarnivore() {//sex of the carnivore is initialised in constructor
+	public void addNewCarnivore() {
 		if(getEmptyLocations().size() > 0){
 			int randomNumber = (int) Math.ceil(Math.random() * getEmptyLocations().size())-1;
 			grid.add(new Carnivore(getEmptyLocations().get(randomNumber), 0));
 		}
+
 	}
 
+	public void addNewOmnivore() {
+		if(getEmptyLocations().size() > 0){
+			int randomNumber = (int) Math.ceil(Math.random() * getEmptyLocations().size())-1;
+			grid.add(new Omnivore(getEmptyLocations().get(randomNumber), 0));
+		}
+
+	}
 
 
 	Terrarium() {
 		this.size = 6;
-
 		grid = new ArrayList<>(36);
 		//minimum capcity max capacity kan je niet instellen
 
@@ -85,11 +92,12 @@ public enum Terrarium {
 			occupiedPlaces.add(organism.getLocation());
 		}
 		List<Location> emptyPlaces = new ArrayList<>();
-		for(int i=0;i<=this.getSize();i++){
-			for(int j=0;j<=this.getSize();j++){ //this.getSize instead of size
+		for(int i=0;i<=size;i++){
+			for(int j=0;j<=size;j++){
 				Location location = new Location(i, j);
 				if(!occupiedPlaces.contains(location)){
 					emptyPlaces.add(location);
+
 				}
 			}
 		}
@@ -116,7 +124,7 @@ public enum Terrarium {
 
 	public void reset(){
 		grid = new ArrayList<>();
-		long capacity = size*size;//ook niet beter met getter ?
+		long capacity = size*size;
 
 		for(int i = 1;i<=numCarnivores;i++){
 			int randomNumber = (int) Math.ceil(Math.random() * capacity)-1;
@@ -131,17 +139,26 @@ public enum Terrarium {
 			this.addOrganism(new Plant(getEmptyLocations().get(randomNumber), 1));
 		}
 
+		for(int i = 1;i<=numOmnivores;i++){
+			int randomNumber = (int) Math.ceil(Math.random() * capacity)-1;
+			this.addOrganism(new Omnivore(getEmptyLocations().get(randomNumber), 1));
+		}
+
+
+
+
 	}
-
-	public void setTerrarium(long sizeTerrarium, long numCarnivores, long numHerbivores,
-							 long numPlants, long numOmnivores){
-
+	public void setTerrariumSiz(long sizeTerrarium){
 		this.size = sizeTerrarium;
+
+	}public void setNumberOfOrganisms(long numCarnivores, long numHerbivores,
+									  long numOmnivores, long numPlants){
+
 		this.numCarnivores = numCarnivores;
 		this.numHerbivores = numHerbivores;
 		this.numOmnivores = numOmnivores;
 		this.numPlants = numPlants;
-		long capacity = sizeTerrarium*sizeTerrarium;
+		long capacity = this.size * this.size;
 		grid = new ArrayList<>();
 
 		for(int i = 1;i<=numCarnivores;i++){
@@ -157,14 +174,15 @@ public enum Terrarium {
 			this.addOrganism(new Plant(getEmptyLocations().get(randomNumber), 1));
 		}
 
+		for(int i=1;i<=numOmnivores;i++){
+			int randomNumber = (int) Math.ceil(Math.random() * capacity)-1;
+			this.addOrganism(new Omnivore(getEmptyLocations().get(randomNumber), 1));
+		}
+
 
 	}
 
 	public long getSize() {
 		return size;
-	}
-
-	public void setSize(long size){
-		this.size = size;
 	}
 }
