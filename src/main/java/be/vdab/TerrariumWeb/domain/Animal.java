@@ -20,7 +20,6 @@ public abstract class Animal extends Organism {
     public boolean move() {
         int currentX = this.getLocation().getX();
         int currentY = this.getLocation().getY();
-
         List<Location> emptyLocations = Terrarium.INSTANCE.getEmptyLocations();
         List<Location> possibleLocations = new ArrayList<>();
         possibleLocations.add(new Location(currentX +1, currentY));
@@ -46,7 +45,9 @@ public abstract class Animal extends Organism {
             }
         }
         possibleLocations.removeAll(removeList);
-        if (possibleLocations.isEmpty()) return false;
+        if (possibleLocations.isEmpty()) {
+            return false;
+        }
         int randomNumber = (int) Math.ceil(Math.random() * possibleLocations.size())-1;
         this.setLocation(possibleLocations.get(randomNumber));
         return true;

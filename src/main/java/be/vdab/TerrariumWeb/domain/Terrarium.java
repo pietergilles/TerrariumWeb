@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public enum Terrarium {
-
 	INSTANCE;
+
 	List<Organism> grid;
 	long size;
 	long numCarnivores;
@@ -13,9 +13,7 @@ public enum Terrarium {
 	long numPlants;
 	long numOmnivores;
 
-
 	public void addOrganism(Organism organism) {
-		//Location occupiedLocation = new Location(organism.getLocation().getX(), organism.getLocation().getY());
 		if (grid.size() <= size*size) {
 			if (!grid.contains(organism)) {
 				grid.add(organism);
