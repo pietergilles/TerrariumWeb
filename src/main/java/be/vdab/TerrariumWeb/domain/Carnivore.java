@@ -49,6 +49,7 @@ public class Carnivore extends Animal{
         if(!hasInteracted){
             this.move();
             this.hasNotEaten();
+            System.out.println("Carnivore has not eaten, it now has " + this.getLifeForce() + " HP");
             return false;
         }
         return true;

@@ -63,6 +63,9 @@ public abstract class Animal extends Organism {
             else if(this instanceof Herbivore){
                 System.out.println("Herbivore died of hunger");
             }
+            else if(this instanceof Herbivore){
+                System.out.println("Omnivore died of hunger");
+            }
         }
     }
 

@@ -21,7 +21,7 @@ public class Omnivore extends Animal{
     public boolean interactWithEnvironment() {
         List<Organism> organisms = this.getTerrarium().getAllOrganisms();
         Location toTheRight = new Location(getLocation().getX() +1, getLocation().getY());
-        if(toTheRight.getX() > this.getTerrarium().getSize()){//klopt dit
+        if(toTheRight.getX() >= this.getTerrarium().getSize()){
             toTheRight.setX(0);
         }
         boolean hasInteracted = false;
@@ -57,6 +57,7 @@ public class Omnivore extends Animal{
         if(!hasInteracted){
             this.hasNotEaten();
             this.move();
+            System.out.println("Omnivore has not eaten, it now has " + this.getLifeForce() + " HP");
             return false;
         }
         return true;
@@ -90,9 +91,6 @@ public class Omnivore extends Animal{
     public char getSex(){
         return this.sex;
     }
-
-
-
 
     private void procreate(){
         Terrarium.INSTANCE.addNewOmnivore();

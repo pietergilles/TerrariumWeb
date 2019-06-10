@@ -48,35 +48,14 @@ public enum Terrarium {
 			int randomNumber = (int) Math.ceil(Math.random() * getEmptyLocations().size())-1;
 			grid.add(new Omnivore(getEmptyLocations().get(randomNumber), 10));
 		}
-
 	}
 	Terrarium() {
 		this.size = 6;
 		this.numCarnivores = 2;
 		this.numPlants = 1;
-		this.numHerbivores = 3;
-		grid = new ArrayList<>(36);
-		//minimum capcity max capacity kan je niet instellen
-
-
-		//in het geval dat het randomnummer hetzelfde is, zal er een fout zijn
-		int randomNumber = (int) Math.ceil(Math.random() * getEmptyLocations().size())-1;
-		this.addOrganism(new Plant(getEmptyLocations().get(randomNumber), 10)); //one lifeforce
-
-		randomNumber = (int) Math.ceil(Math.random() * getEmptyLocations().size())-1;
-		this.addOrganism(new Herbivore(getEmptyLocations().get(randomNumber), 10));
-
-		randomNumber = (int) Math.ceil(Math.random() * getEmptyLocations().size())-1;
-		this.addOrganism(new Herbivore(getEmptyLocations().get(randomNumber), 10));
-
-		randomNumber = (int) Math.ceil(Math.random() * getEmptyLocations().size())-1;
-		this.addOrganism(new Herbivore(getEmptyLocations().get(randomNumber), 10));
-
-		randomNumber = (int) Math.ceil(Math.random() * getEmptyLocations().size())-1;
-		this.addOrganism(new Carnivore(getEmptyLocations().get(randomNumber), 10));
-
-		randomNumber = (int) Math.ceil(Math.random() * getEmptyLocations().size())-1;
-		this.addOrganism(new Carnivore(getEmptyLocations().get(randomNumber), 10));
+		this.numHerbivores = 4;
+		this.numOmnivores = 2;
+		reset();
 	}
 	public List<Location> getEmptyLocations() {
 
@@ -130,7 +109,8 @@ public enum Terrarium {
 		}
 		for(int i = 1;i<=numPlants;i++){
 			int randomNumber = (int) Math.ceil(Math.random() * getEmptyLocations().size())-1;
-			this.addOrganism(new Plant(getEmptyLocations().get(randomNumber), 1));
+			int randomLifeForce = (int) Math.ceil(Math.random() * 10);
+			this.addOrganism(new Plant(getEmptyLocations().get(randomNumber), randomLifeForce));
 		}
 
 	}

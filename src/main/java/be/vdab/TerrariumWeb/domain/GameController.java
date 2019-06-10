@@ -130,7 +130,7 @@ public enum GameController {
 
     public ArrayList< ArrayList<ArrayList<ArrayList<Organism>>>> generateAllDays(){
         days = new ArrayList<>();
-        while(Terrarium.INSTANCE.getEmptyLocations().size() > 0){
+        while(Terrarium.INSTANCE.getEmptyLocations().size() > 0 && days.size()<200){
             days.add(getNextDay());
         }
         System.out.println("Number of days: " + days.size());

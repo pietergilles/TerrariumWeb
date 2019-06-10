@@ -9,9 +9,11 @@
 <div>
     <form th:object="${terrariumSizeForm}" method="post" th:action="@{/userVariablesForm}">
         <label>Select a number to determine the size of the terrarium:</label>
-        <select th:field="*{sizeTerrarium}">
-            <option th:each="i : ${#numbers.sequence(6, 20)}" th:value="${i}" th:text="${i}"></option>
-        </select>
+        <div class="styled-select blue">
+            <select th:field="*{sizeTerrarium}">
+                <option th:each="i : ${#numbers.sequence(6, 12)}" th:value="${i}" th:text="${i}"></option>
+            </select>
+        </div>
         <input type="submit" value="Submit Size Terrarium">
     </form>
 </div>

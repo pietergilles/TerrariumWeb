@@ -1,0 +1,34 @@
+<div th:fragment="playingfield" xmlns:th="http://www.thymeleaf.org" class="playingfield">
+
+<table th:object="${organismRows}">
+
+    <tr th:each="organismRow:${organismRows}">
+        <td th:each="organism:${organismRow}">
+            <img th:if="${organism instanceof T(be.vdab.TerrariumWeb.domain.Herbivore)&& organism.getLifeForce() < 20}"
+                 th:src="@{/images/babyDeer.png}" alt="H">
+            <img th:if="${organism instanceof T(be.vdab.TerrariumWeb.domain.Herbivore)&& organism.getLifeForce() >= 20 && organism.getLifeForce() < 30}"
+                 th:src="@{/images/teenageDeer.png}" alt="H">
+            <img th:if="${organism instanceof T(be.vdab.TerrariumWeb.domain.Herbivore)&& organism.getLifeForce() >= 30}"
+                 th:src="@{/images/adultDeer.png}" alt="H">
+            <img th:if="${organism instanceof T(be.vdab.TerrariumWeb.domain.Carnivore) && organism.getLifeForce() < 20}"
+                 th:src="@{/images/babyTiger.png}" alt="C">
+            <img th:if="${organism instanceof T(be.vdab.TerrariumWeb.domain.Carnivore) &&organism.getLifeForce() >= 20 && organism.getLifeForce() < 30}"
+                 th:src="@{/images/teenageTiger.png}" alt="C">
+            <img th:if="${organism instanceof T(be.vdab.TerrariumWeb.domain.Carnivore) && organism.getLifeForce() >= 30}"
+                 th:src="@{/images/tigerSprite.png}" alt="C">
+            <img th:if="${organism instanceof T(be.vdab.TerrariumWeb.domain.Omnivore) && organism.getLifeForce() < 11}"
+                 th:src="@{/images/babyBear.png}" alt="O">
+            <img th:if="${organism instanceof T(be.vdab.TerrariumWeb.domain.Omnivore) &&organism.getLifeForce() >= 11 && organism.getLifeForce() < 20}"
+                 th:src="@{/images/teenageBear.png}" alt="O">
+            <img th:if="${organism instanceof T(be.vdab.TerrariumWeb.domain.Omnivore) && organism.getLifeForce() >= 20}"
+                 th:src="@{/images/adultBear.png}" alt="O">
+            <img th:if="${organism instanceof T(be.vdab.TerrariumWeb.domain.Plant) && organism.getLifeForce()>0}"
+                 th:src="@{/images/shrub.png}" alt="P">
+            <img th:if="${organism instanceof T(be.vdab.TerrariumWeb.domain.Plant) && organism.getLifeForce()==0}"
+                 th:src="@{/images/nothing.png}" alt="P">
+
+        </td>
+    </tr>
+</table>
+
+</div>

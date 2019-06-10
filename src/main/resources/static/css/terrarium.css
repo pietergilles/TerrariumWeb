@@ -3,17 +3,17 @@ html{
 }
 
 body{
-    /*background-color:aliceblue;*/
-    background-image: url("/images/background.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
+    background-color:aliceblue;
+    /*background-image: url("/images/background.jpg");*/
+    /*background-repeat: no-repeat;*/
+    /*background-size: cover;*/
     min-width: 500px;
     min-height:500px;
     height:100%;
     width:100%;
 }
 h1{
-    color: whitesmoke;
+    color: black;
 }
 
 .header{
@@ -114,6 +114,11 @@ a > img{
     width: 50px;
     height: 50px;
     /*float:left;*/
+}
+
+button > img{
+    width: 50px;
+    height: 50px;
 }
 
 
