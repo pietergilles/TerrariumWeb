@@ -7,7 +7,6 @@ public enum GameController {
 
     INSTANCE;
     ArrayList< ArrayList<ArrayList<ArrayList<Organism>>>> days;
-    long numberOfDays;
 
     public void spawnPlants(){
         for(int i = 1; i<=Terrarium.INSTANCE.getNumPlantsPerDay();i++){
@@ -90,14 +89,12 @@ public enum GameController {
                         organismRow.add(clone(organism));
                         organismFound = true;
                     }
-
                 }
                 if(!organismFound){
                     organismRow.add(new Plant(new Location(x, y), 0));
                 }
             }
             organismRows.add(organismRow);
-
         }
         return organismRows;
     }
@@ -137,7 +134,6 @@ public enum GameController {
             days.add(getNextDay());
         }
         System.out.println("Number of days: " + days.size());
-        numberOfDays = days.size();
         return days;
     }
 
@@ -150,7 +146,7 @@ public enum GameController {
 
     public long getNumberOfDays()
     {
-        return numberOfDays;
+        return days.size();
     }
 
     public long getNumberOfStatesInDay(int day){

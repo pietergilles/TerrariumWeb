@@ -20,6 +20,7 @@ public class GameControllerTest {
     @Test
     public void spawnPlants() {
         int sizeBefore = Terrarium.INSTANCE.getAllOrganisms().size();
+        Terrarium.INSTANCE.setNumbersOfOrganisms(0,0,1,0,0);
         controller.spawnPlants();
         int sizeAfter = Terrarium.INSTANCE.getAllOrganisms().size();
         assertEquals(sizeBefore +1, sizeAfter);
