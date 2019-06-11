@@ -32,6 +32,11 @@ public class Herbivore extends Animal {
                 procreate();
                 System.out.println("Herbivores have procreated");
             }
+            else{
+                this.move();
+                this.hasNotEaten();
+                return false;
+            }
             return true;
         } else if (neighbourOrganism.getClass().equals(Plant.class)) {
                 this.setLifeForce(this.getLifeForce() + neighbourOrganism.getLifeForce());

@@ -36,6 +36,7 @@ public enum GameController {
         for(Organism organism : Terrarium.INSTANCE.getAllOrganisms()){
             if(organism instanceof Herbivore){
                 ((Herbivore) organism).interactWithEnvironment();
+
             }
         }
     }
@@ -101,9 +102,6 @@ public enum GameController {
 
     public ArrayList<ArrayList<ArrayList<Organism>>> getNextDay(){
         ArrayList<ArrayList<ArrayList<Organism>>> states = new ArrayList<>();
-        //spawn shrub
-        GameController.INSTANCE.spawnPlants();
-        states.add(getNextState());
         //let Carnivores interact with environment
         for(Organism organism : Terrarium.INSTANCE.getAllOrganisms()){
             if(organism instanceof Carnivore){
@@ -125,6 +123,9 @@ public enum GameController {
                 states.add(getNextState());
             }
         }
+        //spawn plant
+        GameController.INSTANCE.spawnPlants();
+        states.add(getNextState());
         return states;
     }
 

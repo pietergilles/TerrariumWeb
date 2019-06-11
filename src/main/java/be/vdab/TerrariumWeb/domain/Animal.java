@@ -72,4 +72,6 @@ public abstract class Animal extends Organism {
     {
         this.sex = sex;
     }
+
+
 }
