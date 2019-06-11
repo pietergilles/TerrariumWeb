@@ -23,7 +23,8 @@ public class OrganismsController {
                     userVariablesForm.getNumCarnivores(),
                     userVariablesForm.getNumHerbivores(),
                     userVariablesForm.getNumPlants(),
-                    userVariablesForm.getNumOmnivores());
+                    userVariablesForm.getNumOmnivores(),
+                    userVariablesForm.getNumPlantsPerDay());
             return new ModelAndView("redirect:/terrarium/getTerrarium");
         }
         return new ModelAndView("redirect:/terrarium");
