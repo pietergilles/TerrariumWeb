@@ -141,4 +141,8 @@ public enum Terrarium {
 		this.numPlantsPerDay = numPlantsPerDay;
 		reset();
 	}
+
+	public long getNumPlantsPerDay() {
+		return numPlantsPerDay;
+	}
 }

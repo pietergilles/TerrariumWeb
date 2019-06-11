@@ -13,6 +13,9 @@ public class Herbivore extends Animal {
         Organism neighbourOrganism = null;
         List<Organism> organisms = this.getTerrarium().getAllOrganisms();
         Location organismToMyRight = new Location(getLocation().getX() + 1, getLocation().getY());
+        if(organismToMyRight.getX()>=Terrarium.INSTANCE.getSize()){
+            organismToMyRight.setX(0);
+        }
         for (Organism organism : organisms) {
             if (organism.getLocation().equals(organismToMyRight)) {
                 neighbourOrganism = organism;

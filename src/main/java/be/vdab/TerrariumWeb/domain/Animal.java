@@ -56,16 +56,10 @@ public abstract class Animal extends Organism {
     public void hasNotEaten() {
         setLifeForce(this.getLifeForce()-1);
         if (this.getLifeForce() == 0) {
-            this.getTerrarium().remove(this);
-            if(this instanceof Carnivore){
-                System.out.println("Carnivore died of hunger");
-            }
-            else if(this instanceof Herbivore){
-                System.out.println("Herbivore died of hunger");
-            }
-            else if(this instanceof Herbivore){
-                System.out.println("Omnivore died of hunger");
-            }
+            Location location = this.getLocation();
+            Terrarium.INSTANCE.remove(this);
+            int randomLifeForce = (int) Math.ceil(Math.random() * 10);
+            Terrarium.INSTANCE.addOrganism(new Plant(location, randomLifeForce));
         }
     }
 

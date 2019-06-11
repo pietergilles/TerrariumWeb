@@ -10,12 +10,14 @@ public enum GameController {
     long numberOfDays;
 
     public void spawnPlants(){
-        List<Location> emptyLocations = Terrarium.INSTANCE.getEmptyLocations();
-        if (emptyLocations.size() > 0) {
-            int randomNumber = (int) Math.ceil(Math.random() * emptyLocations.size())-1;
-            int randomLifeForce = (int) Math.ceil(Math.random() * 10);
-            Plant plant = new Plant(emptyLocations.get(randomNumber), randomLifeForce);
-            Terrarium.INSTANCE.addOrganism(plant);
+        for(int i = 1; i<=Terrarium.INSTANCE.getNumPlantsPerDay();i++){
+            List<Location> emptyLocations = Terrarium.INSTANCE.getEmptyLocations();
+            if (emptyLocations.size() > 0) {
+                int randomNumber = (int) Math.ceil(Math.random() * emptyLocations.size())-1;
+                int randomLifeForce = (int) Math.ceil(Math.random() * 10);
+                Plant plant = new Plant(emptyLocations.get(randomNumber), randomLifeForce);
+                Terrarium.INSTANCE.addOrganism(plant);
+            }
         }
     }
     public void activateOrganisms(){
