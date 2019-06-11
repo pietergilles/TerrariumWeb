@@ -22,8 +22,14 @@
                  th:src="@{/images/teenageBear.png}" alt="O">
             <img th:if="${organism instanceof T(be.vdab.TerrariumWeb.domain.Omnivore) && organism.getLifeForce() >= 30}"
                  th:src="@{/images/adultBear.png}" alt="O">
-            <img th:if="${organism instanceof T(be.vdab.TerrariumWeb.domain.Plant) && organism.getLifeForce()>0}"
+            <img th:if="${organism instanceof T(be.vdab.TerrariumWeb.domain.Plant) && organism.getLifeForce()>0 && organism.getLifeForce() < 4}"
                  th:src="@{/images/shrub.png}" alt="P">
+            <img th:if="${organism instanceof T(be.vdab.TerrariumWeb.domain.Plant) && organism.getLifeForce()>3 && organism.getLifeForce() < 7}"
+                 th:src="@{/images/bush.png}" alt="P">
+            <img th:if="${organism instanceof T(be.vdab.TerrariumWeb.domain.Plant) && organism.getLifeForce()>6 && organism.getLifeForce() < 10}"
+                 th:src="@{/images/tree.png}" alt="P">
+            <img th:if="${organism instanceof T(be.vdab.TerrariumWeb.domain.Plant) && organism.getLifeForce()==10}"
+                 th:src="@{/images/bigTree.png}" alt="P">
             <img th:if="${organism instanceof T(be.vdab.TerrariumWeb.domain.Plant) && organism.getLifeForce()==0}"
                  th:src="@{/images/nothing.png}" alt="P">
 

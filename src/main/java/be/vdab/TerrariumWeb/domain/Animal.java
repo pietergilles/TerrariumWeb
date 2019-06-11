@@ -26,22 +26,16 @@ public abstract class Animal extends Organism {
         possibleLocations.add(new Location(currentX -1, currentY));
         possibleLocations.add(new Location(currentX , currentY +1));
         possibleLocations.add(new Location(currentX , currentY -1));
+        for (Location location : possibleLocations) {
+            if(location.getX() >= Terrarium.INSTANCE.getSize()) location.setX(0);
+            if(location.getX() < 0) location.setX((int)Terrarium.INSTANCE.getSize()-1);
+            if(location.getY() >= Terrarium.INSTANCE.getSize()) location.setY(0);
+            if(location.getY() < 0) location.setY((int)Terrarium.INSTANCE.getSize()-1);
+        }
         List<Location> removeList = new ArrayList<>();
-        for (Location possibleLocation : possibleLocations) {
-            if(possibleLocation.getX() > Terrarium.INSTANCE.getSize()) {
-                removeList.add(possibleLocation);
-            }
-            if(possibleLocation.getX() < 0) {
-                removeList.add(possibleLocation);
-            }
-            if(possibleLocation.getY() > Terrarium.INSTANCE.getSize()) {
-                removeList.add(possibleLocation);
-            }
-            if(possibleLocation.getY() < 0) {
-                removeList.add(possibleLocation);
-            }
-            if(!emptyLocations.contains(possibleLocation)) {
-                removeList.add(possibleLocation);
+        for (Location location : possibleLocations) {
+            if(!emptyLocations.contains(location)) {
+                removeList.add(location);
             }
         }
         possibleLocations.removeAll(removeList);
