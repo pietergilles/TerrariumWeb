@@ -12,6 +12,7 @@ public enum Terrarium {
 	long numHerbivores;
 	long numPlants;
 	long numOmnivores;
+	long numPlantsPerDay;
 
 
 	public void addOrganism(Organism organism) {
@@ -132,14 +133,16 @@ public enum Terrarium {
 		return size;
 	}
 
-	public void setNumbersOfOrganisms(long numCarnivores, long numHerbivores, long numPlants, long numOmnivores) {
+	public void setNumbersOfOrganisms(long numCarnivores, long numHerbivores, long numPlants, long numOmnivores, long numPlantsPerDay) {
 		this.numCarnivores = numCarnivores;
 		this.numHerbivores = numHerbivores;
 		this.numPlants = numPlants;
 		this.numOmnivores = numOmnivores;
-
+		this.numPlantsPerDay = numPlantsPerDay;
 		reset();
 	}
 
-
+	public long getNumPlantsPerDay() {
+		return numPlantsPerDay;
+	}
 }
