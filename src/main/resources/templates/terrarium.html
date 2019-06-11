@@ -40,13 +40,18 @@
     <a id="pause" onclick="pause()" title="Pause"><img th:src="@{/images/pause.png}" alt="Pause" ></a>
     <a th:href="@{/terrarium/nextState}" id="nextState" title="Go to next state"><img th:src="@{/images/nextState.png}" alt="Next state"></a>
     <a th:href="@{/terrarium/nextDay}" title="Go to next day"><img th:src="@{/images/nextDay.png}" alt="Next day"></a>
-    <a th:href="@{/terrarium/reset}" title="Reset"><img th:src="@{/images/reset.png}" alt="Reset"></a>
     <br><br>
 
 </div>
 
 
 <div id="playingfield" th:replace="~{fragments::playingfield}"></div>
+<br><br>
+
+<div class="footer">
+    <a th:href="@{/terrarium/reset}" title="Reset"><img th:src="@{/images/reset.png}" alt="Reset"></a>
+    <a th:href="@{/}" title="Go to index"><img th:src="@{/images/home.png}" alt="Home"></a>
+</div>
 
 
 </body>
