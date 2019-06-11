@@ -6,6 +6,15 @@ import java.util.List;
 public abstract class Animal extends Organism {
 
     char sex;
+    int nextHpLevelForPowerup;
+
+    int getNextHpLevelForPowerup() {
+        return nextHpLevelForPowerup;
+    }
+
+    void setNextHpLevelForPowerup(int nextHpLevelForPowerup) {
+        this.nextHpLevelForPowerup = nextHpLevelForPowerup;
+    }
 
     public Animal(Location location, int lifeForce) {
         super(location, lifeForce);
@@ -15,6 +24,7 @@ public abstract class Animal extends Organism {
         } else {
             this.setSex('F');
         }
+        nextHpLevelForPowerup = 20;
     }
 
     public boolean move() {
