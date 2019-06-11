@@ -1,0 +1,7 @@
+TO DO LIJST TERRARIUM
+
+1) zorgen dat alle animal classes zich wel zeker juist gedragen
+2) ervoor zorgen dat dieren zich niet "door de muren heen" kunnen verplaatsen
+3) zorgen dat dieren niet onvermijdelijk sterven van de honger na 30 dagen
+4) kijken of het refreshen van de toestand van het terrarium wat kan worden verbeterd
+5) code "opkuisen"

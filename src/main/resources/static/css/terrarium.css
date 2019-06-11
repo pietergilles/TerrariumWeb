@@ -1,0 +1,125 @@
+html{
+    min-width:500px;
+}
+
+body{
+    background-color:aliceblue;
+    /*background-image: url("/images/background.jpg");*/
+    /*background-repeat: no-repeat;*/
+    /*background-size: cover;*/
+    min-width: 500px;
+    min-height:500px;
+    height:100%;
+    width:100%;
+}
+h1{
+    color: black;
+}
+
+.header{
+    text-align: center;
+}
+.playingfieldwrapper{
+
+
+}
+
+.playingfield{
+    width: 400px;
+    height:0;
+    padding-top: 400px; /*for fixed ascpect ratio*/
+    position:relative;
+    margin-left: auto;
+    margin-right:auto;
+    background-color:saddlebrown;
+}
+
+table {
+    table-layout: fixed;
+    position:absolute; /*nodig omwille van parent fixed aspect*/
+    width: 90%;
+    height: 90%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /*display: inline-block;*/
+    /*vertical-align: middle;*/
+    /*background-image: url("/images/backgroundTable.png");*/
+    /*background-size: cover;*/
+    /*background-color: saddlebrown;*/
+
+}
+
+table th{
+    border: 1px solid black;
+    background-color: dimgray;
+    color:white;
+    text-align: center;
+}
+
+table tr{
+    /*height: 50px;*/
+    /*overflow: hidden;*/
+}
+
+table td {
+    position: relative;
+    /*width: 50px;*/
+    /*height: 50px;*/
+    resize:both;
+    text-align: center;
+    /*white-space: nowrap;*/
+    /*overflow: hidden;*/
+}
+
+table td > img {
+    width: 80%;
+    height:80%;
+    vertical-align: middle;
+    /*resize:both;*/
+    /*overflow: hidden;*/
+}
+
+
+table tr:nth-child(odd) td:nth-child(odd) {
+    background-color: #F2F2E4;
+}
+
+table tr:nth-child(odd) td:nth-child(even) {
+    background-color: #E6E6C8;
+}
+
+table tr:nth-child(even) td:nth-child(odd) {
+    background-color: #E6E6C8;
+}
+
+table tr:nth-child(even) td:nth-child(even) {
+    background-color: #F2F2E4;
+}
+
+dl dt{
+    margin-top: 10px;
+}
+dl dd{
+    font-weight:bold;
+    margin:0;
+}
+
+.errors{
+    color:red;
+    font-weight: bold;
+}
+
+a > img{
+    width: 50px;
+    height: 50px;
+    /*float:left;*/
+}
+
+button > img{
+    width: 50px;
+    height: 50px;
+}
+
+
+
