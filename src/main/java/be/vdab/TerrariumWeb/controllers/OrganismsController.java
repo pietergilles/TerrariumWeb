@@ -22,8 +22,9 @@ public class OrganismsController {
             Terrarium.INSTANCE.setNumbersOfOrganisms(
                     userVariablesForm.getNumCarnivores(),
                     userVariablesForm.getNumHerbivores(),
+                    userVariablesForm.getNumOmnivores(),
                     userVariablesForm.getNumPlants(),
-                    userVariablesForm.getNumOmnivores());
+                    userVariablesForm.getNumPlantsPerDay());
             return new ModelAndView("redirect:/terrarium/getTerrarium");
         }
         return new ModelAndView("redirect:/terrarium");
