@@ -53,7 +53,7 @@
             <label>Number of plants per day:</label>
             <div class="styled-select blue">
                 <select th:field="*{numPlantsPerDay}">
-                    <option th:each="i : ${#numbers.sequence(0, T(be.vdab.TerrariumWeb.domain.Terrarium).INSTANCE.getSize() / 2 + 3)}"
+                    <option th:each="i : ${#numbers.sequence(1, T(be.vdab.TerrariumWeb.domain.Terrarium).INSTANCE.getSize() / 2 + 3)}"
                             th:value="${i}" th:text="${i}"/>
                     </option>
                 </select>
